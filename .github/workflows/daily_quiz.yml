@@ -4,32 +4,26 @@ on:
   schedule:
     # 每天 UTC 09:00 即 香港時間下午 17:00 (UTC+8)
     - cron: '0 9 * * *'
-  workflow_dispatch: # 支援在 GitHub 網頁上手動按「Run workflow」隨時觸發更新
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   update-quiz:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: setup-python@v4
+        uses: setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Generate & Rotate Questions
+      - name: Verify Environment
         run: |
-          python -c "
-          import datetime
-          print(f'Starting Daily P4 Quiz Rotation for {datetime.datetime.now()}...')
-          # 這裡可自動輪替題庫種子或注入新試題
-          "
+          python -c "import datetime; print('P4 Quiz Ready:', datetime.datetime.now())"
 
-      - name: Commit and Push Changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions@users.noreply.github.com'
-          git add index.html || true
-          git commit -m 'Auto-updated P4 Quiz for $(date +'%Y-%m-%d')' || true
-          git push || true
+      - name: Check Status
+        run: echo "Daily schedule triggered successfully."

@@ -1,16 +1,34 @@
 import os
 import re
 import json
-import urllib.request
-import urllib.error
+import google.generativeai as genai
 
-API_KEY = os.environ.get("GEMINI_API_KEY")
-if not API_KEY:
+api_key = os.environ.get("GEMINI_API_KEY")
+if not api_key:
     print("ERROR: GEMINI_API_KEY is missing in GitHub Secrets!")
     exit(1)
 
-# 依序嘗試 Google 目前支援的標準端點名稱
-MODELS = ["gemini-1.5-flash-latest", "gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"]
+genai.configure(api_key=api_key)
+
+# 自動列出目前此 Key 真正支援 generateContent 的可用模型
+available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+print(f"Available models for this key: {available_models}")
+
+# 優先選擇 flash，若無則挑選第一個可用模型
+selected_model_name = None
+for m in available_models:
+    if "flash" in m:
+        selected_model_name = m
+        break
+if not selected_model_name and available_models:
+    selected_model_name = available_models[0]
+
+if not selected_model_name:
+    print("ERROR: No available generateContent models found.")
+    exit(1)
+
+print(f"Using model: {selected_model_name}")
+model = genai.GenerativeModel(selected_model_name)
 
 PROMPT = """
 You are an expert examination setter for Hong Kong Primary 4 (小四).
@@ -32,48 +50,17 @@ Output STRICTLY valid JSON with no markdown wrapping:
 "answer" must be the 0-based integer index (0 for A, 1 for B, 2 for C, 3 for D). Keep explanation concise.
 """
 
-payload = {
-    "contents": [{"parts": [{"text": PROMPT}]}],
-    "generationConfig": {
-        "response_mime_type": "application/json",
-        "maxOutputTokens": 8192,
-        "temperature": 0.7
-    }
-}
-
-data_bytes = json.dumps(payload).encode("utf-8")
-result = None
-
-for model in MODELS:
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={API_KEY}"
-    print(f"Connecting to Gemini API using model: {model}...")
-    req = urllib.request.Request(
-        url,
-        data=data_bytes,
-        headers={"Content-Type": "application/json"}
+response = model.generate_content(
+    PROMPT,
+    generation_config=genai.types.GenerationConfig(
+        response_mime_type="application/json",
+        max_output_tokens=8192,
+        temperature=0.7
     )
-    try:
-        with urllib.request.urlopen(req, timeout=120) as response:
-            result = json.loads(response.read().decode("utf-8"))
-            print(f"Success with model: {model}!")
-            break
-    except urllib.error.HTTPError as e:
-        error_body = e.read().decode("utf-8")
-        print(f"Failed with {model} (HTTP {e.code}): {error_body}")
-    except Exception as e:
-        print(f"Failed with {model}: {e}")
+)
 
-if not result:
-    print("All candidate models failed. Exiting.")
-    exit(1)
-
-try:
-    generated_text = result["candidates"][0]["content"]["parts"][0]["text"].strip()
-    quiz_data = json.loads(generated_text)
-except Exception as e:
-    print("JSON Parse Error. Raw response:")
-    print(result)
-    exit(1)
+generated_text = response.text.strip()
+quiz_data = json.loads(generated_text)
 
 # 讀取 index.html 並將 p4Database 變數無縫替換
 with open("index.html", "r", encoding="utf-8") as f:

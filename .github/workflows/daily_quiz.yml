@@ -23,6 +23,10 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Install Google GenAI SDK
+        run: |
+          pip install google-generativeai
+
       - name: Run Auto Generator
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

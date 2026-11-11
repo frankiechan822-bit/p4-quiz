@@ -1,0 +1,35 @@
+name: Daily P4 Quiz Auto Generator
+
+on:
+  schedule:
+    # 每天 UTC 09:00 即 香港時間下午 17:00 (UTC+8)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # 支援在 GitHub 網頁上手動按「Run workflow」隨時觸發更新
+
+jobs:
+  update-quiz:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Generate & Rotate Questions
+        run: |
+          python -c "
+          import datetime
+          print(f'Starting Daily P4 Quiz Rotation for {datetime.datetime.now()}...')
+          # 這裡可自動輪替題庫種子或注入新試題
+          "
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions@users.noreply.github.com'
+          git add index.html || true
+          git commit -m 'Auto-updated P4 Quiz for $(date +'%Y-%m-%d')' || true
+          git push || true

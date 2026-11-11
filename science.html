@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小四Primary 4 Science (English Medium)模擬測試 (P4 Exam Prep)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+      background-color: #0d0f12;
+      color: #e2e8f0;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+  <main class="w-full max-w-3xl mx-auto px-4 py-6 sm:py-8 flex-1 flex flex-col justify-center">
+
+    <div id="exam-card" class="bg-[#15171c] border border-[#232731] rounded-3xl p-5 sm:p-7 shadow-2xl relative">
+
+      <!-- Navigation to other subjects -->
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 mb-5 p-1.5 bg-[#1a1d24] border border-[#252a36] rounded-2xl text-center">
+        <a href="english.html" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-[#202530]"><i class="fa-solid fa-book"></i> English</a>
+        <a href="maths.html" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-[#202530]"><i class="fa-solid fa-calculator"></i> Maths</a>
+        <a href="chinese.html" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-[#202530]"><i class="fa-solid fa-pen-nib"></i> Chinese</a>
+        <a href="humanities.html" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-[#202530]"><i class="fa-solid fa-landmark"></i> Humanities</a>
+        <a href="science.html" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-blue-600 text-white shadow-md"><i class="fa-solid fa-flask"></i> Science</a>
+      </div>
+
+      <!-- Header Section -->
+      <div class="flex items-center justify-between gap-3 mb-2 flex-wrap">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#1f242d] text-slate-300 border border-[#2d3442]">
+            <i class="fa-solid fa-school text-indigo-400 text-[11px]"></i>
+            Primary 4 Science (English)
+          </span>
+          <h1 id="subject-title" class="text-xl sm:text-2xl font-bold text-white mt-2 tracking-tight">
+            Primary 4 Science (English Medium) (20題獨立卷)
+          </h1>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 bg-[#1b1f27] border border-[#2b323f] px-3.5 py-1.5 rounded-full text-slate-200">
+            <i class="fa-regular fa-clock text-blue-400 text-sm"></i>
+            <span id="timer-text" class="font-mono text-base font-bold tracking-wider text-white">20:00</span>
+          </div>
+          <button id="pause-btn" onclick="togglePause()" class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#212732] hover:bg-[#2c3444] text-slate-300 border border-[#2f3747] transition">
+            <span id="pause-text">Pause</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Question Palette (1–20) -->
+      <div class="mt-5 bg-[#1a1d24] border border-[#262b37] rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between text-xs font-semibold mb-3">
+          <span class="text-slate-400 uppercase tracking-wider">QUESTION PALETTE (1–20)</span>
+          <span id="palette-count" class="text-slate-400">0/20 answered</span>
+        </div>
+        <div id="palette-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-2"></div>
+      </div>
+
+      <!-- Question Area -->
+      <div id="question-area" class="mt-6">
+        <div class="flex items-center justify-between gap-3 mb-4">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="current-item-label" class="text-base sm:text-lg font-bold text-white">Item 1 of 20</span>
+            <span id="topic-tag" class="text-xs font-mono px-2.5 py-0.5 rounded-md bg-[#1f242e] text-slate-400 border border-[#2b323f]">
+              P4 Syllabus
+            </span>
+          </div>
+          <button id="flag-btn" onclick="toggleFlag()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#1a1e26] hover:bg-[#232936] text-slate-300 border border-[#2b3342] transition">
+            <i class="fa-regular fa-flag text-xs"></i>
+            <span id="flag-text">Flag for Review</span>
+          </button>
+        </div>
+
+        <div class="bg-[#191c23] border border-[#252a35] p-4 sm:p-5 rounded-2xl mb-5">
+          <p id="question-text" class="text-sm sm:text-base leading-relaxed text-slate-200 font-medium whitespace-pre-line"></p>
+        </div>
+
+        <div id="options-list" class="space-y-3"></div>
+
+        <!-- Pause Overlay -->
+        <div id="pause-overlay" class="hidden absolute inset-0 bg-[#0d0f12]/90 backdrop-blur-sm rounded-3xl z-30 flex-col items-center justify-center text-center p-6">
+          <div class="w-16 h-16 rounded-2xl bg-[#1e2430] border border-[#2d3648] flex items-center justify-center text-2xl text-blue-400 mb-4">
+            <i class="fa-solid fa-pause"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">測驗已暫停</h3>
+          <p class="text-slate-400 text-sm max-w-sm mb-6">計時已停止。點擊繼續按鈕回到作答畫面。</p>
+          <button onclick="togglePause()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition">
+            Resume Exam (繼續)
+          </button>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center justify-between gap-3 mt-8 pt-5 border-t border-[#232731]">
+        <button id="prev-btn" onclick="navigate(-1)" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1c2029] hover:bg-[#262c3a] text-slate-300 border border-[#2d3546] transition disabled:opacity-30">
+          Previous
+        </button>
+        <button id="next-btn" onclick="navigate(1)" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1c2029] hover:bg-[#262c3a] text-slate-300 border border-[#2d3546] transition">
+          Next
+        </button>
+        <button onclick="confirmSubmission()" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#1f2737] hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/40 transition">
+          Submit Exam
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Results View -->
+    <div id="result-view" class="hidden flex-col gap-6">
+      <div class="bg-[#15171c] border border-[#232731] rounded-3xl p-6 sm:p-8 text-center shadow-2xl">
+        <div class="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-4 bg-blue-600/20 text-blue-400 border border-blue-500/30">
+          <i class="fa-solid fa-award"></i>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">測驗成果 (Exam Results)</h2>
+        <p class="text-slate-400 text-xs sm:text-sm mb-6">Primary 4 Science (English Medium) 表現及評級：</p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl mx-auto mb-6 text-left">
+          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
+            <span class="text-[11px] font-bold uppercase text-slate-400">總得分 (Score)</span>
+            <div id="res-score" class="text-xl sm:text-2xl font-black text-white mt-1">-- / 20</div>
+          </div>
+          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
+            <span class="text-[11px] font-bold uppercase text-slate-400">正確率 (Accuracy)</span>
+            <div id="res-accuracy" class="text-xl sm:text-2xl font-black text-emerald-400 mt-1">--%</div>
+          </div>
+          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
+            <span class="text-[11px] font-bold uppercase text-slate-400">答題時間 (Time)</span>
+            <div id="res-time" class="text-xl sm:text-2xl font-black text-blue-400 mt-1">--:--</div>
+          </div>
+          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
+            <span class="text-[11px] font-bold uppercase text-slate-400">表現等級 (Grade)</span>
+            <div id="res-band" class="text-xl sm:text-2xl font-black text-amber-400 mt-1">優異</div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-3">
+          <button onclick="retakeExam()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition">
+            <i class="fa-solid fa-rotate-right mr-1.5"></i> 重新作答
+          </button>
+          <a href="index.html" class="px-6 py-2.5 rounded-xl bg-[#212732] hover:bg-[#2c3444] text-slate-300 font-semibold text-sm transition border border-[#2f3747]">
+            <i class="fa-solid fa-house mr-1.5"></i> 返回首頁
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-[#15171c] border border-[#232731] rounded-3xl p-6 sm:p-8 shadow-2xl">
+        <h3 class="text-lg font-bold text-white mb-5 flex items-center gap-2">
+          <i class="fa-solid fa-list-check text-blue-400"></i> 逐題剖析與失分陷阱
+        </h3>
+        <div id="review-cards" class="space-y-4"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const questions = [
+  {
+    "id": 1,
+    "category": "Structure of the Earth",
+    "question": "Which layer is the outermost and thinnest rocky surface layer of the Earth?",
+    "options": [
+      "The Crust",
+      "The Mantle",
+      "The Outer Core",
+      "The Inner Core"
+    ],
+    "answer": 0,
+    "explanation": "The crust is the thinnest outer layer where life exists, ranging from about 5 km under oceans to 70 km under continents."
+  },
+  {
+    "id": 2,
+    "category": "Structure of the Earth",
+    "question": "Which layer of the Earth lies directly beneath the crust and contains semi-molten magma?",
+    "options": [
+      "The Atmosphere",
+      "The Mantle",
+      "The Oceanic Trench",
+      "The Inner Core"
+    ],
+    "answer": 1,
+    "explanation": "The mantle is the thickest layer located between the crust and outer core, composed of hot semi-solid rock and magma."
+  },
+  {
+    "id": 3,
+    "category": "Structure of the Earth",
+    "question": "The inner core of the Earth remains solid despite extremely high temperatures mainly because of:",
+    "options": [
+      "The presence of liquid water",
+      "Immense gravitational pressure",
+      "Lack of heavy metals",
+      "Cold ocean currents"
+    ],
+    "answer": 1,
+    "explanation": "Enormous pressure at the center of the Earth prevents the iron and nickel in the inner core from melting into liquid."
+  },
+  {
+    "id": 4,
+    "category": "Structure of the Earth",
+    "question": "Which layer of the Earth is composed of liquid iron and nickel, generating Earth's magnetic field?",
+    "options": [
+      "The Continental Crust",
+      "The Lithosphere",
+      "The Outer Core",
+      "The Upper Mantle"
+    ],
+    "answer": 2,
+    "explanation": "The liquid outer core's convective movement of molten iron and nickel creates the Earth's geomagnetic field."
+  },
+  {
+    "id": 5,
+    "category": "Earth's Rotation & Revolution",
+    "question": "How long does it take for the Earth to complete one full rotation on its own tilted axis?",
+    "options": [
+      "12 hours",
+      "24 hours (1 day)",
+      "30 days",
+      "365 days (1 year)"
+    ],
+    "answer": 1,
+    "explanation": "Earth takes approximately 24 hours to rotate once on its axis, causing the cycle of day and night."
+  },
+  {
+    "id": 6,
+    "category": "Earth's Rotation & Revolution",
+    "question": "The cycle of day and night on Earth is primarily caused by:",
+    "options": [
+      "The revolution of the Earth around the Sun",
+      "The rotation of the Earth on its axis",
+      "The orbit of the Moon around the Earth",
+      "The changing distance between Earth and Sun"
+    ],
+    "answer": 1,
+    "explanation": "As the Earth rotates from west to east, the side facing the Sun experiences daylight while the opposite side experiences darkness."
+  },
+  {
+    "id": 7,
+    "category": "Earth's Rotation & Revolution",
+    "question": "How long does it take for the Earth to complete one full revolution around the Sun?",
+    "options": [
+      "24 hours",
+      "28 days",
+      "About 365.25 days (1 year)",
+      "100 days"
+    ],
+    "answer": 2,
+    "explanation": "It takes Earth roughly 365 and 1/4 days (one solar year) to orbit the Sun completely."
+  },
+  {
+    "id": 8,
+    "category": "Earth's Rotation & Revolution",
+    "question": "The four distinct seasons on Earth are primarily caused by the revolution of the Earth together with:",
+    "options": [
+      "The tilted axis of the Earth (about 23.5 degrees)",
+      "The varying brightness of the Sun",
+      "The gravitational pull of Mars",
+      "The circular shape of the Earth"
+    ],
+    "answer": 0,
+    "explanation": "The tilt of Earth's rotational axis relative to its orbital plane causes different hemispheres to receive varying amounts of direct sunlight throughout the year."
+  },
+  {
+    "id": 9,
+    "category": "Earth's Rotation & Revolution",
+    "question": "When the Northern Hemisphere (e.g., Hong Kong) is tilted toward the Sun and experiences summer, the Southern Hemisphere experiences:",
+    "options": [
+      "Summer",
+      "Winter",
+      "Spring",
+      "Autumn"
+    ],
+    "answer": 1,
+    "explanation": "When the Northern Hemisphere tilts towards the Sun, the Southern Hemisphere tilts away, thus experiencing winter."
+  },
+  {
+    "id": 10,
+    "category": "Types of Rocks",
+    "question": "Which type of rock is formed when molten magma or lava cools down and solidifies?",
+    "options": [
+      "Igneous rock",
+      "Sedimentary rock",
+      "Metamorphic rock",
+      "Fossil rock"
+    ],
+    "answer": 0,
+    "explanation": "Igneous rocks (such as granite and basalt) form directly from the cooling and crystallization of magma or lava."
+  },
+  {
+    "id": 11,
+    "category": "Types of Rocks",
+    "question": "Granite (花崗岩), which is commonly found in the hills of Hong Kong, is an example of:",
+    "options": [
+      "An igneous rock",
+      "A sedimentary rock",
+      "A metamorphic rock",
+      "A volcanic ash rock"
+    ],
+    "answer": 0,
+    "explanation": "Granite is an intrusive igneous rock formed when magma cools slowly beneath the Earth's surface."
+  },
+  {
+    "id": 12,
+    "category": "Types of Rocks",
+    "question": "Which type of rock is formed through the accumulation, compaction, and cementation of mineral particles over long periods?",
+    "options": [
+      "Sedimentary rock",
+      "Igneous rock",
+      "Volcanic glass",
+      "Magma rock"
+    ],
+    "answer": 0,
+    "explanation": "Sedimentary rocks (like sandstone, shale, and limestone) are formed from compressed layers of sediments deposited in water or land."
+  },
+  {
+    "id": 13,
+    "category": "Types of Rocks",
+    "question": "In which type of rock are ancient animal and plant fossils most commonly preserved?",
+    "options": [
+      "Igneous rock",
+      "Sedimentary rock",
+      "Molten lava",
+      "Deep metamorphic rock"
+    ],
+    "answer": 1,
+    "explanation": "Fossils are almost exclusively preserved in sedimentary rocks because the extreme heat of igneous and metamorphic processes destroys organic remains."
+  },
+  {
+    "id": 14,
+    "category": "Types of Rocks",
+    "question": "Which type of rock is formed when existing rocks undergo transformation due to intense heat and high pressure deep underground?",
+    "options": [
+      "Metamorphic rock",
+      "Igneous rock",
+      "Sedimentary rock",
+      "Sandy rock"
+    ],
+    "answer": 0,
+    "explanation": "Metamorphic rocks (like marble and slate) form when heat and pressure alter existing igneous or sedimentary rocks without fully melting them."
+  },
+  {
+    "id": 15,
+    "category": "Types of Rocks",
+    "question": "Marble (大理石), widely used in building sculptures and tiles, is a metamorphic rock formed from:",
+    "options": [
+      "Limestone (石灰岩)",
+      "Granite (花崗岩)",
+      "Sandstone (砂岩)",
+      "Basalt (玄武岩)"
+    ],
+    "answer": 0,
+    "explanation": "Marble is formed when limestone is exposed to high temperatures and pressures deep within the Earth."
+  },
+  {
+    "id": 16,
+    "category": "Weathering & Erosion",
+    "question": "The natural process by which rocks are gradually broken down into smaller fragments by wind, rain, and temperature changes is called:",
+    "options": [
+      "Weathering",
+      "Eruption",
+      "Evaporation",
+      "Condensation"
+    ],
+    "answer": 0,
+    "explanation": "Weathering is the breaking down or dissolving of rocks and minerals on Earth's surface by physical, chemical, or biological agents."
+  },
+  {
+    "id": 17,
+    "category": "Weathering & Erosion",
+    "question": "The transportation of weathered rock fragments and soil from one place to another by water or wind is called:",
+    "options": [
+      "Erosion",
+      "Metamorphism",
+      "Sedimentation",
+      "Melting"
+    ],
+    "answer": 0,
+    "explanation": "Erosion involves the movement of weathered rock materials by natural forces such as running water, waves, or wind."
+  },
+  {
+    "id": 18,
+    "category": "Rock Cycle",
+    "question": "According to the rock cycle, if an igneous or sedimentary rock melts completely, it becomes:",
+    "options": [
+      "Magma (or lava)",
+      "Soil",
+      "Fossil fuels",
+      "Sediment"
+    ],
+    "answer": 0,
+    "explanation": "When rock is heated beyond its melting point deep inside the Earth, it returns to molten liquid rock called magma."
+  },
+  {
+    "id": 19,
+    "category": "Earth & Moon",
+    "question": "Why does the Sun appear to rise in the east and set in the west every day?",
+    "options": [
+      "Because the Earth rotates from west to east",
+      "Because the Sun moves across the sky",
+      "Because the Earth orbits the Moon",
+      "Because the Earth's axis does not tilt"
+    ],
+    "answer": 0,
+    "explanation": "Earth's counter-clockwise rotation (from west to east) makes celestial bodies, including the Sun, appear to move across the sky from east to west."
+  },
+  {
+    "id": 20,
+    "category": "Minerals & Rocks",
+    "question": "What is the relationship between minerals and rocks?",
+    "options": [
+      "Rocks are made up of one or more minerals",
+      "Minerals are made of melted rocks",
+      "All rocks are pure chemical elements",
+      "Rocks and minerals are unrelated"
+    ],
+    "answer": 0,
+    "explanation": "Rocks are solid natural aggregates composed of one or more minerals (for example, granite is made of quartz, feldspar, and mica)."
+  }
+];
+
+    let curIndex = 0;
+    let userAnswers = new Array(20).fill(null);
+    let userFlags = new Array(20).fill(false);
+    let timer = 1200;
+    let timeSpent = 0;
+    let timerId = null;
+    let isPaused = false;
+
+    function renderPalette() {
+      const grid = document.getElementById('palette-grid');
+      grid.innerHTML = '';
+      for (let i = 0; i < 20; i++) {
+        const btn = document.createElement('button');
+        btn.id = `pal-${i}`;
+        btn.textContent = i + 1;
+        btn.className = getPaletteClass(i);
+        btn.onclick = () => { if (!isPaused) loadQuestion(i); };
+        grid.appendChild(btn);
+      }
+      updateAnsweredCount();
+    }
+
+    function getPaletteClass(i) {
+      const isCur = i === curIndex;
+      const isAns = userAnswers[i] !== null;
+      const isFlg = userFlags[i];
+      let base = "h-9 w-full rounded-xl text-xs font-bold transition flex items-center justify-center ";
+
+      if (isCur) return base + "bg-[#1d2535] text-blue-400 border-2 border-blue-500 shadow-md";
+      if (isFlg) return base + "bg-[#25221b] text-amber-300 border border-amber-500/80";
+      if (isAns) return base + "bg-blue-600/25 text-blue-300 border border-blue-500/60";
+      return base + "bg-[#181c24] text-slate-400 border border-[#272e3d] hover:bg-[#202632]";
+    }
+
+    function updateAnsweredCount() {
+      const count = userAnswers.filter(a => a !== null).length;
+      document.getElementById('palette-count').textContent = `${count}/20 answered`;
+    }
+
+    function loadQuestion(idx) {
+      curIndex = idx;
+      const q = questions[idx];
+
+      document.getElementById('current-item-label').textContent = `Item ${idx + 1} of 20`;
+      document.getElementById('topic-tag').textContent = `${q.category} • P4 Curriculum`;
+      document.getElementById('question-text').textContent = q.question;
+
+      updateFlagButtonUI();
+
+      const container = document.getElementById('options-list');
+      container.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+
+      q.options.forEach((opt, optIdx) => {
+        const isChosen = userAnswers[curIndex] === optIdx;
+        const btn = document.createElement('button');
+        btn.className = `w-full text-left p-3.5 sm:p-4 rounded-2xl border transition flex items-center justify-between group ${
+          isChosen
+            ? 'bg-[#1b253b] border-blue-500 text-white shadow-lg ring-1 ring-blue-500/50'
+            : 'bg-[#171a21] border-[#252b37] hover:border-[#353d4e] hover:bg-[#1c202a] text-slate-300'
+        }`;
+
+        btn.onclick = () => {
+          if (!isPaused) {
+            userAnswers[curIndex] = optIdx;
+            loadQuestion(curIndex);
+          }
+        };
+
+        btn.innerHTML = `
+          <div class="flex items-center gap-3.5">
+            <span class="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold transition ${
+              isChosen ? 'bg-blue-600 text-white shadow-md' : 'bg-[#222733] text-slate-400 group-hover:text-slate-200 border border-[#2d3444]'
+            }">${letters[optIdx]}</span>
+            <span class="text-sm sm:text-base ${isChosen ? 'text-white font-medium' : ''}">${opt}</span>
+          </div>
+          ${isChosen ? '<i class="fa-solid fa-circle-check text-blue-400 text-base"></i>' : ''}
+        `;
+        container.appendChild(btn);
+      });
+
+      document.getElementById('prev-btn').disabled = idx === 0;
+      document.getElementById('next-btn').disabled = idx === 19;
+
+      for (let i = 0; i < 20; i++) {
+        const b = document.getElementById(`pal-${i}`);
+        if (b) b.className = getPaletteClass(i);
+      }
+      updateAnsweredCount();
+    }
+
+    function navigate(delta) {
+      const next = curIndex + delta;
+      if (next >= 0 && next < 20) loadQuestion(next);
+    }
+
+    function toggleFlag() {
+      userFlags[curIndex] = !userFlags[curIndex];
+      updateFlagButtonUI();
+      const b = document.getElementById(`pal-${curIndex}`);
+      if (b) b.className = getPaletteClass(curIndex);
+    }
+
+    function updateFlagButtonUI() {
+      const isFlg = userFlags[curIndex];
+      const flagBtn = document.getElementById('flag-btn');
+      const flagText = document.getElementById('flag-text');
+      if (isFlg) {
+        flagBtn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/60 transition";
+        flagText.textContent = "Flagged";
+        flagBtn.querySelector('i').className = "fa-solid fa-flag text-xs text-amber-400";
+      } else {
+        flagBtn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#1a1e26] hover:bg-[#232936] text-slate-300 border border-[#2b3342] transition";
+        flagText.textContent = "Flag for Review";
+        flagBtn.querySelector('i').className = "fa-regular fa-flag text-xs";
+      }
+    }
+
+    function startTimer() {
+      clearInterval(timerId);
+      timerId = setInterval(() => {
+        if (!isPaused) {
+          if (timer > 0) {
+            timer--;
+            timeSpent++;
+            renderTimer();
+          } else {
+            clearInterval(timerId);
+            finishExam();
+          }
+        }
+      }, 1000);
+    }
+
+    function renderTimer() {
+      const m = Math.floor(timer / 60);
+      const s = timer % 60;
+      document.getElementById('timer-text').textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    function togglePause() {
+      isPaused = !isPaused;
+      const overlay = document.getElementById('pause-overlay');
+      const txt = document.getElementById('pause-text');
+      if (isPaused) {
+        txt.textContent = "Resume";
+        overlay.classList.remove('hidden');
+        overlay.classList.add('flex');
+      } else {
+        txt.textContent = "Pause";
+        overlay.classList.remove('flex');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    function confirmSubmission() {
+      const unans = userAnswers.filter(a => a === null).length;
+      let msg = "確定現在交卷嗎？";
+      if (unans > 0) msg = `你尚有 ${unans} 題未作答！確定現在交卷嗎？`;
+      if (window.confirm(msg)) finishExam();
+    }
+
+    function finishExam() {
+      document.getElementById('exam-card').classList.add('hidden');
+      document.getElementById('result-view').classList.remove('hidden');
+      document.getElementById('result-view').classList.add('flex');
+
+      let score = 0;
+      questions.forEach((q, idx) => {
+        if (userAnswers[idx] === q.answer) score++;
+      });
+
+      const accuracy = Math.round((score / 20) * 100);
+      const m = Math.floor(timeSpent / 60);
+      const s = timeSpent % 60;
+
+      document.getElementById('res-score').textContent = `${score} / 20`;
+      document.getElementById('res-accuracy').textContent = `${accuracy}%`;
+      document.getElementById('res-time').textContent = `${m}分 ${s}秒`;
+
+      let banding = '需要努力';
+      if (score >= 18) banding = '優異 (Band 1A 等級)';
+      else if (score >= 15) banding = '良好 (Band 1 等級)';
+      else if (score >= 12) banding = '尚可 (Band 2 等級)';
+      document.getElementById('res-band').textContent = banding;
+
+      const container = document.getElementById('review-cards');
+      container.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+
+      questions.forEach((q, i) => {
+        const userChoice = userAnswers[i];
+        const isOk = userChoice === q.answer;
+        const card = document.createElement('div');
+        card.className = `p-4 sm:p-5 rounded-2xl border transition ${isOk ? 'bg-[#141d1a] border-emerald-500/30' : 'bg-[#201518] border-rose-500/30'}`;
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-2 mb-2 flex-wrap">
+            <span class="font-bold text-white text-sm sm:text-base">第 ${i + 1} 題：${q.question}</span>
+            <span class="px-2.5 py-0.5 rounded-md text-xs font-bold ${isOk ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-rose-500/20 text-rose-300 border border-rose-500/40'}">
+              ${isOk ? '答對 Correct' : '答錯 Incorrect'}
+            </span>
+          </div>
+          <div class="text-xs sm:text-sm text-slate-300 grid grid-cols-1 sm:grid-cols-2 gap-2 my-2.5">
+            <div class="bg-[#181a20] p-2.5 rounded-xl border border-[#252832]">
+              你的答案：<strong class="${isOk ? 'text-emerald-400' : 'text-rose-400'}">${userChoice !== null ? letters[userChoice] + '. ' + q.options[userChoice] : '未作答'}</strong>
+            </div>
+            <div class="bg-[#181a20] p-2.5 rounded-xl border border-[#252832]">
+              正確答案：<strong class="text-emerald-400">${letters[q.answer]}. ${q.options[q.answer]}</strong>
+            </div>
+          </div>
+          <div class="mt-3 text-xs sm:text-sm bg-[#161921] p-3.5 rounded-xl border border-[#262c3a] text-slate-300 leading-relaxed">
+            <strong class="text-blue-400 font-semibold block mb-1">詳細思路與解題分析：</strong>
+            ${q.explanation}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function retakeExam() {
+      userAnswers.fill(null);
+      userFlags.fill(false);
+      timer = 1200;
+      timeSpent = 0;
+      isPaused = false;
+
+      document.getElementById('result-view').classList.remove('flex');
+      document.getElementById('result-view').classList.add('hidden');
+      document.getElementById('exam-card').classList.remove('hidden');
+
+      loadQuestion(0);
+      renderPalette();
+    }
+
+    window.onload = () => {
+      renderPalette();
+      loadQuestion(0);
+      startTimer();
+    };
+  </script>
+</body>
+</html>

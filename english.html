@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小四小四英文科模擬卷模擬測試 (P4 Exam Prep)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+      background-color: #0d0f12;
+      color: #e2e8f0;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+  <main class="w-full max-w-3xl mx-auto px-4 py-6 sm:py-8 flex-1 flex flex-col justify-center">
+
+    <div id="exam-card" class="bg-[#15171c] border border-[#232731] rounded-3xl p-5 sm:p-7 shadow-2xl relative">
+
+      <!-- Navigation to other subjects -->
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 mb-5 p-1.5 bg-[#1a1d24] border border-[#252a36] rounded-2xl text-center">
+        <a href="english.html" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-blue-600 text-white shadow-md"><i class="fa-solid fa-book"></i> English</a>
+        <a href="maths.html" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-[#202530]"><i class="fa-solid fa-calculator"></i> Maths</a>
+        <a href="chinese.html" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-[#202530]"><i class="fa-solid fa-pen-nib"></i> Chinese</a>
+        <a href="humanities.html" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-[#202530]"><i class="fa-solid fa-landmark"></i> Humanities</a>
+        <a href="science.html" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-[#202530]"><i class="fa-solid fa-flask"></i> Science</a>
+      </div>
+
+      <!-- Header Section -->
+      <div class="flex items-center justify-between gap-3 mb-2 flex-wrap">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#1f242d] text-slate-300 border border-[#2d3442]">
+            <i class="fa-solid fa-school text-indigo-400 text-[11px]"></i>
+            Primary 4 English Assessment
+          </span>
+          <h1 id="subject-title" class="text-xl sm:text-2xl font-bold text-white mt-2 tracking-tight">
+            小四英文科模擬卷 (20題獨立卷)
+          </h1>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 bg-[#1b1f27] border border-[#2b323f] px-3.5 py-1.5 rounded-full text-slate-200">
+            <i class="fa-regular fa-clock text-blue-400 text-sm"></i>
+            <span id="timer-text" class="font-mono text-base font-bold tracking-wider text-white">20:00</span>
+          </div>
+          <button id="pause-btn" onclick="togglePause()" class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#212732] hover:bg-[#2c3444] text-slate-300 border border-[#2f3747] transition">
+            <span id="pause-text">Pause</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Question Palette (1–20) -->
+      <div class="mt-5 bg-[#1a1d24] border border-[#262b37] rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between text-xs font-semibold mb-3">
+          <span class="text-slate-400 uppercase tracking-wider">QUESTION PALETTE (1–20)</span>
+          <span id="palette-count" class="text-slate-400">0/20 answered</span>
+        </div>
+        <div id="palette-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-2"></div>
+      </div>
+
+      <!-- Question Area -->
+      <div id="question-area" class="mt-6">
+        <div class="flex items-center justify-between gap-3 mb-4">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="current-item-label" class="text-base sm:text-lg font-bold text-white">Item 1 of 20</span>
+            <span id="topic-tag" class="text-xs font-mono px-2.5 py-0.5 rounded-md bg-[#1f242e] text-slate-400 border border-[#2b323f]">
+              P4 Syllabus
+            </span>
+          </div>
+          <button id="flag-btn" onclick="toggleFlag()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#1a1e26] hover:bg-[#232936] text-slate-300 border border-[#2b3342] transition">
+            <i class="fa-regular fa-flag text-xs"></i>
+            <span id="flag-text">Flag for Review</span>
+          </button>
+        </div>
+
+        <div class="bg-[#191c23] border border-[#252a35] p-4 sm:p-5 rounded-2xl mb-5">
+          <p id="question-text" class="text-sm sm:text-base leading-relaxed text-slate-200 font-medium whitespace-pre-line"></p>
+        </div>
+
+        <div id="options-list" class="space-y-3"></div>
+
+        <!-- Pause Overlay -->
+        <div id="pause-overlay" class="hidden absolute inset-0 bg-[#0d0f12]/90 backdrop-blur-sm rounded-3xl z-30 flex-col items-center justify-center text-center p-6">
+          <div class="w-16 h-16 rounded-2xl bg-[#1e2430] border border-[#2d3648] flex items-center justify-center text-2xl text-blue-400 mb-4">
+            <i class="fa-solid fa-pause"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">測驗已暫停</h3>
+          <p class="text-slate-400 text-sm max-w-sm mb-6">計時已停止。點擊繼續按鈕回到作答畫面。</p>
+          <button onclick="togglePause()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition">
+            Resume Exam (繼續)
+          </button>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center justify-between gap-3 mt-8 pt-5 border-t border-[#232731]">
+        <button id="prev-btn" onclick="navigate(-1)" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1c2029] hover:bg-[#262c3a] text-slate-300 border border-[#2d3546] transition disabled:opacity-30">
+          Previous
+        </button>
+        <button id="next-btn" onclick="navigate(1)" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1c2029] hover:bg-[#262c3a] text-slate-300 border border-[#2d3546] transition">
+          Next
+        </button>
+        <button onclick="confirmSubmission()" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#1f2737] hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/40 transition">
+          Submit Exam
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Results View -->
+    <div id="result-view" class="hidden flex-col gap-6">
+      <div class="bg-[#15171c] border border-[#232731] rounded-3xl p-6 sm:p-8 text-center shadow-2xl">
+        <div class="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-4 bg-blue-600/20 text-blue-400 border border-blue-500/30">
+          <i class="fa-solid fa-award"></i>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">測驗成果 (Exam Results)</h2>
+        <p class="text-slate-400 text-xs sm:text-sm mb-6">小四英文科模擬卷 表現及評級：</p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl mx-auto mb-6 text-left">
+          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
+            <span class="text-[11px] font-bold uppercase text-slate-400">總得分 (Score)</span>
+            <div id="res-score" class="text-xl sm:text-2xl font-black text-white mt-1">-- / 20</div>
+          </div>
+          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
+            <span class="text-[11px] font-bold uppercase text-slate-400">正確率 (Accuracy)</span>
+            <div id="res-accuracy" class="text-xl sm:text-2xl font-black text-emerald-400 mt-1">--%</div>
+          </div>
+          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
+            <span class="text-[11px] font-bold uppercase text-slate-400">答題時間 (Time)</span>
+            <div id="res-time" class="text-xl sm:text-2xl font-black text-blue-400 mt-1">--:--</div>
+          </div>
+          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
+            <span class="text-[11px] font-bold uppercase text-slate-400">表現等級 (Grade)</span>
+            <div id="res-band" class="text-xl sm:text-2xl font-black text-amber-400 mt-1">優異</div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-3">
+          <button onclick="retakeExam()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition">
+            <i class="fa-solid fa-rotate-right mr-1.5"></i> 重新作答
+          </button>
+          <a href="index.html" class="px-6 py-2.5 rounded-xl bg-[#212732] hover:bg-[#2c3444] text-slate-300 font-semibold text-sm transition border border-[#2f3747]">
+            <i class="fa-solid fa-house mr-1.5"></i> 返回首頁
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-[#15171c] border border-[#232731] rounded-3xl p-6 sm:p-8 shadow-2xl">
+        <h3 class="text-lg font-bold text-white mb-5 flex items-center gap-2">
+          <i class="fa-solid fa-list-check text-blue-400"></i> 逐題剖析與失分陷阱
+        </h3>
+        <div id="review-cards" class="space-y-4"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const questions = [
+  {
+    "id": 1,
+    "category": "Simple Past Tense",
+    "question": "Ken ________ a postcard to his grandparents in Canada last Sunday.",
+    "options": [
+      "writes",
+      "wrote",
+      "writing",
+      "is writing"
+    ],
+    "answer": 1,
+    "explanation": "時間詞「last Sunday」代表過去發生的動作，需使用 write 的過去式 wrote。"
+  },
+  {
+    "id": 2,
+    "category": "Connectives",
+    "question": "Amy likes playing the piano, ________ her brother prefers playing football.",
+    "options": [
+      "so",
+      "because",
+      "but",
+      "or"
+    ],
+    "answer": 2,
+    "explanation": "前後兩句喜好不同，存在轉折對比關係，應用 but。"
+  },
+  {
+    "id": 3,
+    "category": "Prepositions of Time",
+    "question": "The annual sports day will be held ________ 15th December.",
+    "options": [
+      "at",
+      "in",
+      "on",
+      "to"
+    ],
+    "answer": 2,
+    "explanation": "具體的某一天或特定日期（15th December）前面使用介詞 on。"
+  },
+  {
+    "id": 4,
+    "category": "Comparatives",
+    "question": "A cheetah runs much ________ than a turtle.",
+    "options": [
+      "fast",
+      "faster",
+      "fastest",
+      "more fast"
+    ],
+    "answer": 1,
+    "explanation": "句子中有 than 進行兩者對比，fast 的比較級是 faster。"
+  },
+  {
+    "id": 5,
+    "category": "Quantifiers",
+    "question": "There isn't ________ apple juice left in the refrigerator.",
+    "options": [
+      "many",
+      "much",
+      "some",
+      "few"
+    ],
+    "answer": 1,
+    "explanation": "apple juice 為不可數名詞，且在否定句（isn't）中，數量代名詞應使用 much。"
+  },
+  {
+    "id": 6,
+    "category": "Modals",
+    "question": "You ________ wash your hands before having lunch to stay healthy.",
+    "options": [
+      "must",
+      "can't",
+      "may not",
+      "mustn't"
+    ],
+    "answer": 0,
+    "explanation": "飯前洗手是保持衛生的必要行為，表示義務或強烈建議使用 must。"
+  },
+  {
+    "id": 7,
+    "category": "Plural Nouns",
+    "question": "The farmer feeds five white ________ every morning in the pond.",
+    "options": [
+      "gooses",
+      "geese",
+      "goosies",
+      "geeses"
+    ],
+    "answer": 1,
+    "explanation": "goose（鵝）的不規則複數形式為 geese。"
+  },
+  {
+    "id": 8,
+    "category": "Proofreading",
+    "question": "Find the error: \"She (A) doesn't (B) likes (C) eating spicy food (D).\"",
+    "options": [
+      "She",
+      "doesn't",
+      "likes",
+      "food"
+    ],
+    "answer": 2,
+    "explanation": "在助動詞 doesn't 後面，主要動詞必須回復原形 like，不可加 s。"
+  },
+  {
+    "id": 9,
+    "category": "Question Words",
+    "question": "________ does this box of chocolates cost? — It costs fifty dollars.",
+    "options": [
+      "How many",
+      "How much",
+      "How often",
+      "How long"
+    ],
+    "answer": 1,
+    "explanation": "詢問價錢或金額時，使用疑問詞「How much」。"
+  },
+  {
+    "id": 10,
+    "category": "Adverbs of Frequency",
+    "question": "Peter brushed his teeth twice a day. He ________ forgets to do so.",
+    "options": [
+      "always",
+      "seldom",
+      "usually",
+      "often"
+    ],
+    "answer": 1,
+    "explanation": "每天刷兩次牙說明他「很少（seldom）」忘記。"
+  },
+  {
+    "id": 11,
+    "category": "Pronouns",
+    "question": "Look at that lovely dog! ________ coat is so smooth and shiny.",
+    "options": [
+      "It's",
+      "Its",
+      "Its'",
+      "It"
+    ],
+    "answer": 1,
+    "explanation": "修飾名詞 coat 表示「它的」，需用物主代名詞 its；it's 為 it is 的縮寫。"
+  },
+  {
+    "id": 12,
+    "category": "Future Tense",
+    "question": "We ________ visit the Wetland Park with our teachers tomorrow.",
+    "options": [
+      "are going to",
+      "visited",
+      "have visited",
+      "visits"
+    ],
+    "answer": 0,
+    "explanation": "時間詞 tomorrow 代表將來計劃，配合主語 We 使用 are going to visit。"
+  },
+  {
+    "id": 13,
+    "category": "Superlatives",
+    "question": "Mount Everest is the ________ mountain in the world.",
+    "options": [
+      "high",
+      "higher",
+      "highest",
+      "most high"
+    ],
+    "answer": 2,
+    "explanation": "定冠詞 the 加上全世界範圍的比較，high 的最高級為 highest。"
+  },
+  {
+    "id": 14,
+    "category": "Prepositions of Place",
+    "question": "The cat is sleeping peacefully ________ the dining table.",
+    "options": [
+      "under",
+      "between",
+      "among",
+      "into"
+    ],
+    "answer": 0,
+    "explanation": "貓咪在餐桌「底下」睡覺，空間介詞用 under。"
+  },
+  {
+    "id": 15,
+    "category": "Gerunds",
+    "question": "My little sister is good at ________ paper planes.",
+    "options": [
+      "make",
+      "makes",
+      "making",
+      "made"
+    ],
+    "answer": 2,
+    "explanation": "在介詞 at 後方，動詞需改為動名詞（V-ing）形式 making。"
+  },
+  {
+    "id": 16,
+    "category": "Subject-Verb Agreement",
+    "question": "Either Sam or his brothers ________ going to tidy up the bedroom.",
+    "options": [
+      "is",
+      "are",
+      "was",
+      "be"
+    ],
+    "answer": 1,
+    "explanation": "在「Either... or...」結構中，動詞依隨靠近的主語 his brothers（複數），故用 are。"
+  },
+  {
+    "id": 17,
+    "category": "Proofreading",
+    "question": "Find the mistake: \"Did you (A) saw (B) the shooting star (C) last night (D)?\"",
+    "options": [
+      "Did",
+      "saw",
+      "shooting",
+      "night"
+    ],
+    "answer": 1,
+    "explanation": "在助動詞 Did 後面，動詞必須回復原形 see。"
+  },
+  {
+    "id": 18,
+    "category": "Connectives",
+    "question": "David put on his heavy jacket ________ it was chilly outside.",
+    "options": [
+      "although",
+      "because",
+      "so",
+      "unless"
+    ],
+    "answer": 1,
+    "explanation": "穿厚外套的原因是外面很冷，表原因關係用 because。"
+  },
+  {
+    "id": 19,
+    "category": "Ordinal Numbers",
+    "question": "May came first in the race, so she won the ________ prize.",
+    "options": [
+      "one",
+      "first",
+      "once",
+      "single"
+    ],
+    "answer": 1,
+    "explanation": "表達比賽名次或獎項順序需用序數詞 first。"
+  },
+  {
+    "id": 20,
+    "category": "Reflexive Pronouns",
+    "question": "Tim hurt ________ when he fell off his bicycle in the park.",
+    "options": [
+      "himself",
+      "hisself",
+      "him",
+      "themself"
+    ],
+    "answer": 0,
+    "explanation": "主語 Tim（男性單數）對應的反身代名詞為 himself。"
+  }
+];
+
+    let curIndex = 0;
+    let userAnswers = new Array(20).fill(null);
+    let userFlags = new Array(20).fill(false);
+    let timer = 1200;
+    let timeSpent = 0;
+    let timerId = null;
+    let isPaused = false;
+
+    function renderPalette() {
+      const grid = document.getElementById('palette-grid');
+      grid.innerHTML = '';
+      for (let i = 0; i < 20; i++) {
+        const btn = document.createElement('button');
+        btn.id = `pal-${i}`;
+        btn.textContent = i + 1;
+        btn.className = getPaletteClass(i);
+        btn.onclick = () => { if (!isPaused) loadQuestion(i); };
+        grid.appendChild(btn);
+      }
+      updateAnsweredCount();
+    }
+
+    function getPaletteClass(i) {
+      const isCur = i === curIndex;
+      const isAns = userAnswers[i] !== null;
+      const isFlg = userFlags[i];
+      let base = "h-9 w-full rounded-xl text-xs font-bold transition flex items-center justify-center ";
+
+      if (isCur) return base + "bg-[#1d2535] text-blue-400 border-2 border-blue-500 shadow-md";
+      if (isFlg) return base + "bg-[#25221b] text-amber-300 border border-amber-500/80";
+      if (isAns) return base + "bg-blue-600/25 text-blue-300 border border-blue-500/60";
+      return base + "bg-[#181c24] text-slate-400 border border-[#272e3d] hover:bg-[#202632]";
+    }
+
+    function updateAnsweredCount() {
+      const count = userAnswers.filter(a => a !== null).length;
+      document.getElementById('palette-count').textContent = `${count}/20 answered`;
+    }
+
+    function loadQuestion(idx) {
+      curIndex = idx;
+      const q = questions[idx];
+
+      document.getElementById('current-item-label').textContent = `Item ${idx + 1} of 20`;
+      document.getElementById('topic-tag').textContent = `${q.category} • P4 Curriculum`;
+      document.getElementById('question-text').textContent = q.question;
+
+      updateFlagButtonUI();
+
+      const container = document.getElementById('options-list');
+      container.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+
+      q.options.forEach((opt, optIdx) => {
+        const isChosen = userAnswers[curIndex] === optIdx;
+        const btn = document.createElement('button');
+        btn.className = `w-full text-left p-3.5 sm:p-4 rounded-2xl border transition flex items-center justify-between group ${
+          isChosen
+            ? 'bg-[#1b253b] border-blue-500 text-white shadow-lg ring-1 ring-blue-500/50'
+            : 'bg-[#171a21] border-[#252b37] hover:border-[#353d4e] hover:bg-[#1c202a] text-slate-300'
+        }`;
+
+        btn.onclick = () => {
+          if (!isPaused) {
+            userAnswers[curIndex] = optIdx;
+            loadQuestion(curIndex);
+          }
+        };
+
+        btn.innerHTML = `
+          <div class="flex items-center gap-3.5">
+            <span class="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold transition ${
+              isChosen ? 'bg-blue-600 text-white shadow-md' : 'bg-[#222733] text-slate-400 group-hover:text-slate-200 border border-[#2d3444]'
+            }">${letters[optIdx]}</span>
+            <span class="text-sm sm:text-base ${isChosen ? 'text-white font-medium' : ''}">${opt}</span>
+          </div>
+          ${isChosen ? '<i class="fa-solid fa-circle-check text-blue-400 text-base"></i>' : ''}
+        `;
+        container.appendChild(btn);
+      });
+
+      document.getElementById('prev-btn').disabled = idx === 0;
+      document.getElementById('next-btn').disabled = idx === 19;
+
+      for (let i = 0; i < 20; i++) {
+        const b = document.getElementById(`pal-${i}`);
+        if (b) b.className = getPaletteClass(i);
+      }
+      updateAnsweredCount();
+    }
+
+    function navigate(delta) {
+      const next = curIndex + delta;
+      if (next >= 0 && next < 20) loadQuestion(next);
+    }
+
+    function toggleFlag() {
+      userFlags[curIndex] = !userFlags[curIndex];
+      updateFlagButtonUI();
+      const b = document.getElementById(`pal-${curIndex}`);
+      if (b) b.className = getPaletteClass(curIndex);
+    }
+
+    function updateFlagButtonUI() {
+      const isFlg = userFlags[curIndex];
+      const flagBtn = document.getElementById('flag-btn');
+      const flagText = document.getElementById('flag-text');
+      if (isFlg) {
+        flagBtn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/60 transition";
+        flagText.textContent = "Flagged";
+        flagBtn.querySelector('i').className = "fa-solid fa-flag text-xs text-amber-400";
+      } else {
+        flagBtn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#1a1e26] hover:bg-[#232936] text-slate-300 border border-[#2b3342] transition";
+        flagText.textContent = "Flag for Review";
+        flagBtn.querySelector('i').className = "fa-regular fa-flag text-xs";
+      }
+    }
+
+    function startTimer() {
+      clearInterval(timerId);
+      timerId = setInterval(() => {
+        if (!isPaused) {
+          if (timer > 0) {
+            timer--;
+            timeSpent++;
+            renderTimer();
+          } else {
+            clearInterval(timerId);
+            finishExam();
+          }
+        }
+      }, 1000);
+    }
+
+    function renderTimer() {
+      const m = Math.floor(timer / 60);
+      const s = timer % 60;
+      document.getElementById('timer-text').textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    function togglePause() {
+      isPaused = !isPaused;
+      const overlay = document.getElementById('pause-overlay');
+      const txt = document.getElementById('pause-text');
+      if (isPaused) {
+        txt.textContent = "Resume";
+        overlay.classList.remove('hidden');
+        overlay.classList.add('flex');
+      } else {
+        txt.textContent = "Pause";
+        overlay.classList.remove('flex');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    function confirmSubmission() {
+      const unans = userAnswers.filter(a => a === null).length;
+      let msg = "確定現在交卷嗎？";
+      if (unans > 0) msg = `你尚有 ${unans} 題未作答！確定現在交卷嗎？`;
+      if (window.confirm(msg)) finishExam();
+    }
+
+    function finishExam() {
+      document.getElementById('exam-card').classList.add('hidden');
+      document.getElementById('result-view').classList.remove('hidden');
+      document.getElementById('result-view').classList.add('flex');
+
+      let score = 0;
+      questions.forEach((q, idx) => {
+        if (userAnswers[idx] === q.answer) score++;
+      });
+
+      const accuracy = Math.round((score / 20) * 100);
+      const m = Math.floor(timeSpent / 60);
+      const s = timeSpent % 60;
+
+      document.getElementById('res-score').textContent = `${score} / 20`;
+      document.getElementById('res-accuracy').textContent = `${accuracy}%`;
+      document.getElementById('res-time').textContent = `${m}分 ${s}秒`;
+
+      let banding = '需要努力';
+      if (score >= 18) banding = '優異 (Band 1A 等級)';
+      else if (score >= 15) banding = '良好 (Band 1 等級)';
+      else if (score >= 12) banding = '尚可 (Band 2 等級)';
+      document.getElementById('res-band').textContent = banding;
+
+      const container = document.getElementById('review-cards');
+      container.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+
+      questions.forEach((q, i) => {
+        const userChoice = userAnswers[i];
+        const isOk = userChoice === q.answer;
+        const card = document.createElement('div');
+        card.className = `p-4 sm:p-5 rounded-2xl border transition ${isOk ? 'bg-[#141d1a] border-emerald-500/30' : 'bg-[#201518] border-rose-500/30'}`;
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-2 mb-2 flex-wrap">
+            <span class="font-bold text-white text-sm sm:text-base">第 ${i + 1} 題：${q.question}</span>
+            <span class="px-2.5 py-0.5 rounded-md text-xs font-bold ${isOk ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-rose-500/20 text-rose-300 border border-rose-500/40'}">
+              ${isOk ? '答對 Correct' : '答錯 Incorrect'}
+            </span>
+          </div>
+          <div class="text-xs sm:text-sm text-slate-300 grid grid-cols-1 sm:grid-cols-2 gap-2 my-2.5">
+            <div class="bg-[#181a20] p-2.5 rounded-xl border border-[#252832]">
+              你的答案：<strong class="${isOk ? 'text-emerald-400' : 'text-rose-400'}">${userChoice !== null ? letters[userChoice] + '. ' + q.options[userChoice] : '未作答'}</strong>
+            </div>
+            <div class="bg-[#181a20] p-2.5 rounded-xl border border-[#252832]">
+              正確答案：<strong class="text-emerald-400">${letters[q.answer]}. ${q.options[q.answer]}</strong>
+            </div>
+          </div>
+          <div class="mt-3 text-xs sm:text-sm bg-[#161921] p-3.5 rounded-xl border border-[#262c3a] text-slate-300 leading-relaxed">
+            <strong class="text-blue-400 font-semibold block mb-1">詳細思路與解題分析：</strong>
+            ${q.explanation}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function retakeExam() {
+      userAnswers.fill(null);
+      userFlags.fill(false);
+      timer = 1200;
+      timeSpent = 0;
+      isPaused = false;
+
+      document.getElementById('result-view').classList.remove('flex');
+      document.getElementById('result-view').classList.add('hidden');
+      document.getElementById('exam-card').classList.remove('hidden');
+
+      loadQuestion(0);
+      renderPalette();
+    }
+
+    window.onload = () => {
+      renderPalette();
+      loadQuestion(0);
+      startTimer();
+    };
+  </script>
+</body>
+</html>

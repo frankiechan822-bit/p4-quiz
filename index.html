@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>香港小學四年級五科綜合模擬測試 (P4 Exam Prep - Updated)</title>
+  <title>香港小學四年級五科模擬測試平台 (P4 Exam Prep)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
@@ -12,541 +12,74 @@
       font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
       background-color: #0d0f12;
       color: #e2e8f0;
-      -webkit-font-smoothing: antialiased;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+<body class="min-h-screen flex flex-col justify-center items-center p-4">
 
-  <main class="w-full max-w-3xl mx-auto px-4 py-6 sm:py-8 flex-1 flex flex-col justify-center">
+  <div class="max-w-xl w-full bg-[#15171c] border border-[#232731] rounded-3xl p-6 sm:p-8 shadow-2xl text-center">
+    <div class="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center text-3xl mb-4 bg-blue-600/20 text-blue-400 border border-blue-500/30">
+      <i class="fa-solid fa-graduation-cap"></i>
+    </div>
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">小四全科模擬測試平台</h1>
+    <p class="text-slate-400 text-sm mb-6">請選擇要進行測試的獨立科目（每科 20 題，限時 20 分鐘）：</p>
 
-    <div id="exam-card" class="bg-[#15171c] border border-[#232731] rounded-3xl p-5 sm:p-7 shadow-2xl relative">
-
-      <!-- 5-Subject Tab Navigation -->
-      <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 mb-5 p-1.5 bg-[#1a1d24] border border-[#252a36] rounded-2xl">
-        <button id="tab-English" onclick="switchSubject('English')" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-blue-600 text-white shadow-md">
-          <i class="fa-solid fa-book"></i> 英文科
-        </button>
-        <button id="tab-Maths" onclick="switchSubject('Maths')" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white">
-          <i class="fa-solid fa-calculator"></i> 數學科
-        </button>
-        <button id="tab-Chinese" onclick="switchSubject('Chinese')" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white">
-          <i class="fa-solid fa-pen-nib"></i> 中文科
-        </button>
-        <button id="tab-Humanities" onclick="switchSubject('Humanities')" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white">
-          <i class="fa-solid fa-landmark"></i> 人文科
-        </button>
-        <button id="tab-Science" onclick="switchSubject('Science')" class="py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white col-span-2 sm:col-span-1">
-          <i class="fa-solid fa-flask"></i> Science (英)
-        </button>
-      </div>
-
-      <!-- Header Section -->
-      <div class="flex items-center justify-between gap-3 mb-2 flex-wrap">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+      <a href="english.html" class="p-4 rounded-2xl bg-[#1a1d24] border border-[#262b37] hover:border-blue-500 transition group flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center text-lg group-hover:bg-blue-600 group-hover:text-white transition">
+          <i class="fa-solid fa-book"></i>
+        </div>
         <div>
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#1f242d] text-slate-300 border border-[#2d3442]">
-            <i class="fa-solid fa-school text-indigo-400 text-[11px]"></i>
-            HK Primary 4 Assessment Series
-          </span>
-          <h1 id="subject-title" class="text-xl sm:text-2xl font-bold text-white mt-2 tracking-tight">
-            小四英文科模擬卷 (20題)
-          </h1>
+          <h2 class="text-base font-bold text-white group-hover:text-blue-400 transition">英文科 (English)</h2>
+          <p class="text-xs text-slate-400">時態、介詞、Proofreading</p>
         </div>
+      </a>
 
-        <div class="flex items-center gap-2">
-          <div class="flex items-center gap-2 bg-[#1b1f27] border border-[#2b323f] px-3.5 py-1.5 rounded-full text-slate-200">
-            <i class="fa-regular fa-clock text-blue-400 text-sm"></i>
-            <span id="timer-text" class="font-mono text-base font-bold tracking-wider text-white">20:00</span>
-          </div>
-          <button id="pause-btn" onclick="togglePause()" class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#212732] hover:bg-[#2c3444] text-slate-300 border border-[#2f3747] transition">
-            <span id="pause-text">Pause</span>
-          </button>
+      <a href="maths.html" class="p-4 rounded-2xl bg-[#1a1d24] border border-[#262b37] hover:border-blue-500 transition group flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-lg group-hover:bg-emerald-600 group-hover:text-white transition">
+          <i class="fa-solid fa-calculator"></i>
         </div>
-      </div>
-
-      <!-- Question Palette (1–20) -->
-      <div class="mt-5 bg-[#1a1d24] border border-[#262b37] rounded-2xl p-4 sm:p-5">
-        <div class="flex items-center justify-between text-xs font-semibold mb-3">
-          <span class="text-slate-400 uppercase tracking-wider">QUESTION PALETTE (1–20)</span>
-          <span id="palette-count" class="text-slate-400">0/20 answered</span>
+        <div>
+          <h2 class="text-base font-bold text-white group-hover:text-emerald-400 transition">數學科 (Maths)</h2>
+          <p class="text-xs text-slate-400">H.C.F.、L.C.M.、四則運算</p>
         </div>
-        <div id="palette-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-2"></div>
-      </div>
+      </a>
 
-      <!-- Question Area -->
-      <div id="question-area" class="mt-6">
-        <div class="flex items-center justify-between gap-3 mb-4">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span id="current-item-label" class="text-base sm:text-lg font-bold text-white">Item 1 of 20</span>
-            <span id="topic-tag" class="text-xs font-mono px-2.5 py-0.5 rounded-md bg-[#1f242e] text-slate-400 border border-[#2b323f]">
-              P4 Syllabus
-            </span>
-          </div>
-          <button id="flag-btn" onclick="toggleFlag()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#1a1e26] hover:bg-[#232936] text-slate-300 border border-[#2b3342] transition">
-            <i class="fa-regular fa-flag text-xs"></i>
-            <span id="flag-text">Flag for Review</span>
-          </button>
+      <a href="chinese.html" class="p-4 rounded-2xl bg-[#1a1d24] border border-[#262b37] hover:border-blue-500 transition group flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-amber-600/20 text-amber-400 flex items-center justify-center text-lg group-hover:bg-amber-600 group-hover:text-white transition">
+          <i class="fa-solid fa-pen-nib"></i>
         </div>
-
-        <div class="bg-[#191c23] border border-[#252a35] p-4 sm:p-5 rounded-2xl mb-5">
-          <p id="question-text" class="text-sm sm:text-base leading-relaxed text-slate-200 font-medium whitespace-pre-line"></p>
+        <div>
+          <h2 class="text-base font-bold text-white group-hover:text-amber-400 transition">中文科 (Chinese)</h2>
+          <p class="text-xs text-slate-400">錯別字、成語、關聯詞</p>
         </div>
+      </a>
 
-        <div id="options-list" class="space-y-3"></div>
-
-        <!-- Pause Overlay -->
-        <div id="pause-overlay" class="hidden absolute inset-0 bg-[#0d0f12]/90 backdrop-blur-sm rounded-3xl z-30 flex-col items-center justify-center text-center p-6">
-          <div class="w-16 h-16 rounded-2xl bg-[#1e2430] border border-[#2d3648] flex items-center justify-center text-2xl text-blue-400 mb-4">
-            <i class="fa-solid fa-pause"></i>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2">測驗已暫停</h3>
-          <p class="text-slate-400 text-sm max-w-sm mb-6">計時已停止。點擊繼續按鈕回到作答畫面。</p>
-          <button onclick="togglePause()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition">
-            Resume Exam (繼續)
-          </button>
+      <a href="humanities.html" class="p-4 rounded-2xl bg-[#1a1d24] border border-[#262b37] hover:border-blue-500 transition group flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-lg group-hover:bg-purple-600 group-hover:text-white transition">
+          <i class="fa-solid fa-landmark"></i>
         </div>
-      </div>
+        <div>
+          <h2 class="text-base font-bold text-white group-hover:text-purple-400 transition">人文科 (Humanities)</h2>
+          <p class="text-xs text-slate-400">香港地理社區、歷史文化</p>
+        </div>
+      </a>
 
-      <!-- Controls -->
-      <div class="flex items-center justify-between gap-3 mt-8 pt-5 border-t border-[#232731]">
-        <button id="prev-btn" onclick="navigate(-1)" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1c2029] hover:bg-[#262c3a] text-slate-300 border border-[#2d3546] transition disabled:opacity-30">
-          Previous
-        </button>
-        <button id="next-btn" onclick="navigate(1)" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1c2029] hover:bg-[#262c3a] text-slate-300 border border-[#2d3546] transition">
-          Next
-        </button>
-        <button onclick="confirmSubmission()" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#1f2737] hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/40 transition">
-          Submit Exam
-        </button>
-      </div>
-
+      <a href="science.html" class="p-4 rounded-2xl bg-[#1a1d24] border border-[#262b37] hover:border-blue-500 transition group flex items-center gap-3.5 sm:col-span-2">
+        <div class="w-10 h-10 rounded-xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-lg group-hover:bg-rose-600 group-hover:text-white transition">
+          <i class="fa-solid fa-flask"></i>
+        </div>
+        <div>
+          <h2 class="text-base font-bold text-white group-hover:text-rose-400 transition">Science (English Medium)</h2>
+          <p class="text-xs text-slate-400">Earth Structure, Rotation/Revolution, Rocks</p>
+        </div>
+      </a>
     </div>
 
-    <!-- Results View -->
-    <div id="result-view" class="hidden flex-col gap-6">
-      <div class="bg-[#15171c] border border-[#232731] rounded-3xl p-6 sm:p-8 text-center shadow-2xl">
-        <div class="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-4 bg-blue-600/20 text-blue-400 border border-blue-500/30">
-          <i class="fa-solid fa-award"></i>
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">測驗成果 (P4 Exam Results)</h2>
-        <p class="text-slate-400 text-xs sm:text-sm mb-6">小四重點測驗表現及評級：</p>
-
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl mx-auto mb-6 text-left">
-          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
-            <span class="text-[11px] font-bold uppercase text-slate-400">總得分 (Score)</span>
-            <div id="res-score" class="text-xl sm:text-2xl font-black text-white mt-1">-- / 20</div>
-          </div>
-          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
-            <span class="text-[11px] font-bold uppercase text-slate-400">正確率 (Accuracy)</span>
-            <div id="res-accuracy" class="text-xl sm:text-2xl font-black text-emerald-400 mt-1">--%</div>
-          </div>
-          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
-            <span class="text-[11px] font-bold uppercase text-slate-400">答題時間 (Time)</span>
-            <div id="res-time" class="text-xl sm:text-2xl font-black text-blue-400 mt-1">--:--</div>
-          </div>
-          <div class="bg-[#1a1d24] border border-[#262b37] p-3.5 rounded-2xl">
-            <span class="text-[11px] font-bold uppercase text-slate-400">表現等級 (Grade)</span>
-            <div id="res-band" class="text-xl sm:text-2xl font-black text-amber-400 mt-1">優異</div>
-          </div>
-        </div>
-
-        <button onclick="retakeSubject()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition">
-          <i class="fa-solid fa-rotate-right mr-1.5"></i> 重新作答本卷
-        </button>
-      </div>
-
-      <div class="bg-[#15171c] border border-[#232731] rounded-3xl p-6 sm:p-8 shadow-2xl">
-        <h3 class="text-lg font-bold text-white mb-5 flex items-center gap-2">
-          <i class="fa-solid fa-list-check text-blue-400"></i> 逐題剖析與失分陷阱
-        </h3>
-        <div id="review-cards" class="space-y-4"></div>
-      </div>
+    <div class="mt-6 pt-4 border-t border-[#232731] text-xs text-slate-500">
+      香港小學四年級校本評估 • 20 分鐘計時及即時評分
     </div>
+  </div>
 
-  </main>
-
-  <script>
-    const p4Database = {
-      English: [
-        { id: 1, category: "Simple Past Tense", question: "Ken ________ a postcard to his grandparents in Canada last Sunday.", options: ["writes", "wrote", "writing", "is writing"], answer: 1, explanation: "時間詞「last Sunday」代表過去發生的動作，需使用 write 的過去式 wrote。" },
-        { id: 2, category: "Connectives", question: "Amy likes playing the piano, ________ her brother prefers playing football.", options: ["so", "because", "but", "or"], answer: 2, explanation: "前後兩句喜好不同，存在轉折對比關係，應用 but。" },
-        { id: 3, category: "Prepositions of Time", question: "The annual sports day will be held ________ 15th December.", options: ["at", "in", "on", "to"], answer: 2, explanation: "具體的某一天或特定日期（15th December）前面使用介詞 on。" },
-        { id: 4, category: "Comparatives", question: "A cheetah runs much ________ than a turtle.", options: ["fast", "faster", "fastest", "more fast"], answer: 1, explanation: "句子中有 than 進行兩者對比，fast 的比較級是 faster。" },
-        { id: 5, category: "Quantifiers", question: "There isn't ________ apple juice left in the refrigerator.", options: ["many", "much", "some", "few"], answer: 1, explanation: "apple juice 為不可數名詞，且在否定句（isn't）中，數量代名詞應使用 much。" },
-        { id: 6, category: "Modals", question: "You ________ wash your hands before having lunch to stay healthy.", options: ["must", "can't", "may not", "mustn't"], answer: 0, explanation: "飯前洗手是保持衛生的必要行為，表示義務或強烈建議使用 must。" },
-        { id: 7, category: "Plural Nouns", question: "The farmer feeds five white ________ every morning in the pond.", options: ["gooses", "geese", "goosies", "geeses"], answer: 1, explanation: "goose（鵝）的不規則複數形式為 geese。" },
-        { id: 8, category: "Proofreading", question: "Find the error: \"She (A) doesn't (B) likes (C) eating spicy food (D).\"", options: ["She", "doesn't", "likes", "food"], answer: 2, explanation: "在助動詞 doesn't 後面，主要動詞必須回復原形 like，不可加 s。" },
-        { id: 9, category: "Question Words", question: "________ does this box of chocolates cost? — It costs fifty dollars.", options: ["How many", "How much", "How often", "How long"], answer: 1, explanation: "詢問價錢或金額時，使用疑問詞「How much」。" },
-        { id: 10, category: "Adverbs of Frequency", question: "Peter brushed his teeth twice a day. He ________ forgets to do so.", options: ["always", "seldom", "usually", "often"], answer: 1, explanation: "每天刷兩次牙說明他「很少（seldom）」忘記。" },
-        { id: 11, category: "Pronouns", question: "Look at that lovely dog! ________ coat is so smooth and shiny.", options: ["It's", "Its", "Its'", "It"], answer: 1, explanation: "修飾名詞 coat 表示「它的」，需用物主代名詞 its；it's 為 it is 的縮寫。" },
-        { id: 12, category: "Future Tense", question: "We ________ visit the Wetland Park with our teachers tomorrow.", options: ["are going to", "visited", "have visited", "visits"], answer: 0, explanation: "時間詞 tomorrow 代表將來計劃，配合主語 We 使用 are going to visit。" },
-        { id: 13, category: "Superlatives", question: "Mount Everest is the ________ mountain in the world.", options: ["high", "higher", "highest", "most high"], answer: 2, explanation: "定冠詞 the 加上全世界範圍的比較，high 的最高級為 highest。" },
-        { id: 14, category: "Prepositions of Place", question: "The cat is sleeping peacefully ________ the dining table.", options: ["under", "between", "among", "into"], answer: 0, explanation: "貓咪在餐桌「底下」睡覺，空間介詞用 under。" },
-        { id: 15, category: "Gerunds", question: "My little sister is good at ________ paper planes.", options: ["make", "makes", "making", "made"], answer: 2, explanation: "在介詞 at 後方，動詞需改為動名詞（V-ing）形式 making。" },
-        { id: 16, category: "Subject-Verb Agreement", question: "Either Sam or his brothers ________ going to tidy up the bedroom.", options: ["is", "are", "was", "be"], answer: 1, explanation: "在「Either... or...」結構中，動詞依隨靠近的主語 his brothers（複數），故用 are。" },
-        { id: 17, category: "Proofreading", question: "Find the mistake: \"Did you (A) saw (B) the shooting star (C) last night (D)?\"", options: ["Did", "saw", "shooting", "night"], answer: 1, explanation: "在助動詞 Did 後面，動詞必須回復原形 see。" },
-        { id: 18, category: "Connectives", question: "David put on his heavy jacket ________ it was chilly outside.", options: ["although", "because", "so", "unless"], answer: 1, explanation: "穿厚外套的原因是外面很冷，表原因關係用 because。" },
-        { id: 19, category: "Ordinal Numbers", question: "May came first in the race, so she won the ________ prize.", options: ["one", "first", "once", "single"], answer: 1, explanation: "表達比賽名次或獎項順序需用序數詞 first。" },
-        { id: 20, category: "Reflexive Pronouns", question: "Tim hurt ________ when he fell off his bicycle in the park.", options: ["himself", "hisself", "him", "themself"], answer: 0, explanation: "主語 Tim（男性單數）對應的反身代名詞為 himself。" }
-      ],
-      Maths: [
-        { id: 1, category: "最大公因數 (H.C.F.)", question: "18 和 24 的最大公因數 (H.C.F.) 是多少？", options: ["2", "3", "6", "12"], answer: 2, explanation: "18 的因數有 1, 2, 3, 6, 9, 18；24 的因數有 1, 2, 3, 4, 6, 8, 12, 24。公因數為 1, 2, 3, 6，最大公因數是 6。" },
-        { id: 2, category: "最小公倍數 (L.C.M.)", question: "12 和 15 的最小公倍數 (L.C.M.) 是多少？", options: ["30", "45", "60", "180"], answer: 2, explanation: "12 的倍數有 12, 24, 36, 48, 60...；15 的倍數有 15, 30, 45, 60...。最小公倍數是 60。" },
-        { id: 3, category: "H.C.F. 求解", question: "28 和 42 的最大公因數 (H.C.F.) 是多少？", options: ["7", "14", "2", "4"], answer: 1, explanation: "28 = 14 × 2，42 = 14 × 3。28 和 42 的最大公因數是 14。" },
-        { id: 4, category: "L.C.M. 求解", question: "8 和 12 的最小公倍數 (L.C.M.) 是多少？", options: ["16", "24", "48", "96"], answer: 1, explanation: "8 的倍數有 8, 16, 24...；12 的倍數有 12, 24...。最小公倍數是 24。" },
-        { id: 5, category: "三數的 L.C.M.", question: "6、9 和 12 的最小公倍數 (L.C.M.) 是多少？", options: ["18", "24", "36", "72"], answer: 2, explanation: "6, 9, 12 的公倍數中，最小且能同時被三者整除的正整數為 36 (36÷6=6, 36÷9=4, 36÷12=3)。" },
-        { id: 6, category: "H.C.F. 應用題", question: "老師有兩條長度分別為 24 厘米及 36 厘米的彩帶，剪成相同長度的小段且沒有剩餘，每段最長是多少厘米？", options: ["4 厘米", "6 厘米", "12 厘米", "18 厘米"], answer: 2, explanation: "求剪切且無剩餘的最長長度，即求 24 和 36 的最大公因數 (H.C.F.) = 12 厘米。" },
-        { id: 7, category: "L.C.M. 應用題", question: "學校的兩個鐘，一個每 15 分鐘響一次，另一個每 20 分鐘響一次。它們在早上 8:00 同時鳴響，下一次同時鳴響是在甚麼時間？", options: ["8:30", "8:45", "9:00", "9:20"], answer: 2, explanation: "相隔時間為 15 和 20 的最小公倍數 (L.C.M.) = 60 分鐘。8:00 加上 60 分鐘為 9:00。" },
-        { id: 8, category: "三數的 H.C.F.", question: "16、24 和 32 的最大公因數 (H.C.F.) 是多少？", options: ["4", "8", "16", "2"], answer: 1, explanation: "16, 24, 32 能被 8 整除 (16÷8=2, 24÷8=3, 32÷8=4)，最大公因數是 8。" },
-        { id: 9, category: "因數與倍數關係", question: "若 A 是 B 的倍數，那麼 A 和 B 的最大公因數 (H.C.F.) 是甚麼？", options: ["A", "B", "A × B", "1"], answer: 1, explanation: "當較大數是較小數的倍數時，較小數 B 本身就是兩者的最大公因數。" },
-        { id: 10, category: "三位數乘法", question: "計算：248 × 15 = ？", options: ["3720", "3620", "3820", "3520"], answer: 0, explanation: "248 × 15 = 2480 + 1240 = 3720。" },
-        { id: 11, category: "除法運算", question: "計算：750 ÷ 25 = ？", options: ["25", "30", "35", "20"], answer: 1, explanation: "750 ÷ 25 = 30。" },
-        { id: 12, category: "長方形周界", question: "一個長方形長 18 cm，闊 12 cm，它的周界是多少 cm？", options: ["30 cm", "60 cm", "216 cm", "48 cm"], answer: 1, explanation: "周界 = (長 + 闊) × 2 = (18 + 12) × 2 = 60 cm。" },
-        { id: 13, category: "長方形面積", question: "客廳地毯長 14 米，闊 9 米，地毯的面積是多少平方米？", options: ["46 平方米", "126 平方米", "116 平方米", "63 平方米"], answer: 1, explanation: "面積 = 長 × 闊 = 14 × 9 = 126 平方米。" },
-        { id: 14, category: "同分母分數加法", question: "計算：3/8 + 2/8 = ？", options: ["5/16", "5/8", "1/8", "6/8"], answer: 1, explanation: "同分母相加，分母不變，分子 3+2=5，得 5/8。" },
-        { id: 15, category: "正方形周界與邊長", question: "正方形相框的周界是 52 cm，它的邊長是多少 cm？", options: ["13 cm", "26 cm", "14 cm", "169 cm"], answer: 0, explanation: "邊長 = 周界 ÷ 4 = 52 ÷ 4 = 13 cm。" },
-        { id: 16, category: "四則混合運算", question: "計算：120 + 80 ÷ 4 = ？", options: ["50", "140", "160", "200"], answer: 1, explanation: "先除後加：80 ÷ 4 = 20，120 + 20 = 140。" },
-        { id: 17, category: "公因數判斷", question: "下列哪一組數的最大公因數 (H.C.F.) 是 1（互質）？", options: ["9 和 12", "15 和 25", "8 和 15", "14 和 21"], answer: 2, explanation: "8 的因數為 1, 2, 4, 8；15 的因數為 1, 3, 5, 15。公因數只有 1。" },
-        { id: 18, category: "正方形拼合 (L.C.M. 應用)", question: "用長 6 厘米、闊 4 厘米的長方形卡紙，拼成一個最小的正方形，這個正方形的邊長是多少厘米？", options: ["12 厘米", "24 厘米", "10 厘米", "16 厘米"], answer: 0, explanation: "正方形的邊長必須同時是長和闊的公倍數，最小正方形邊長即 6 和 4 的 L.C.M. = 12 厘米。" },
-        { id: 19, category: "同分母分數減法", question: "計算：1 - 4/7 = ？", options: ["3/7", "4/7", "1/7", "5/7"], answer: 0, explanation: "1 = 7/7，7/7 - 4/7 = 3/7。" },
-        { id: 20, category: "容量單位換算", question: "4 公升 250 毫升等於多少毫升 (mL)？", options: ["4250 mL", "4025 mL", "425 mL", "40250 mL"], answer: 0, explanation: "4 公升 = 4000 毫升，4000 + 250 = 4250 mL。" }
-      ],
-      Chinese: [
-        { id: 1, category: "錯別字辨識", question: "下列句子中，哪一個詞語「沒有」錯別字？", options: ["他學習非常刻苦，成績名列前矛。", "這座花園的花草樹木修剪得整整齊齊。", "小狗在草地上開心地追逐嬉細。", "大家必須遵守校規，切勿隨意曠課。"], answer: 3, explanation: "D 完全正確。A 應為「名列前茅」；C 應為「嬉戲」。" },
-        { id: 2, category: "成語運用", question: "「這幅山水畫畫得十分生動，花鳥樹木簡直________。」橫線上應填入：", options: ["栩栩如生", "畫蛇添足", "目不暇給", "掩耳盜鈴"], answer: 0, explanation: "「栩栩如生」形容藝術作品生動逼真，就像活的一樣。" },
-        { id: 3, category: "關聯詞搭配", question: "「________我們平時勤加練習，________能在比賽中取得好成績。」橫線應填：", options: ["只有……才……", "雖然……但是……", "即使……也……", "與其……不如……"], answer: 0, explanation: "表唯一的條件關係，標準搭配為「只有……才……」。" },
-        { id: 4, category: "修辭辨析", question: "「天上的星星像一顆顆閃爍的鑽石。」這句話運用了甚麼修辭手法？", options: ["擬人", "比喻（明喻）", "誇張", "排比"], answer: 1, explanation: "本體（星星）與喻體（鑽石），並有比喻詞「像」，屬於明喻。" },
-        { id: 5, category: "病句辨析", question: "下列哪一句沒有語病？", options: ["我們全班同學都喜歡打籃球，除了志明不喜歡。", "秋天的北京是一個美麗的季節。", "聽了這段感人的故事，我不禁流下了眼淚。", "他把作業本大概可能忘在家裡了。"], answer: 2, explanation: "C 語意通順。A 前後矛盾；B 北京是城市不是季節；D 「大概」與「可能」詞義重複。" },
-        { id: 6, category: "近義詞辨析", question: "選出最適當的詞語：「這項科技發明在醫學領域具有十分________的貢獻。」", options: ["廣大", "巨大", "長大", "粗大"], answer: 1, explanation: "形容貢獻或成就顯著，通常搭配「巨大」。" },
-        { id: 7, category: "標點符號", question: "「你明天打算去公共圖書館借書嗎_____」句子末尾應加上甚麼標點？", options: ["感嘆號（！）", "問號（？）", "句號（。）", "分號（；）"], answer: 1, explanation: "這是一句帶有疑問語氣的疑問句，結尾需用問號。" },
-        { id: 8, category: "語句重組", question: "重組句子：\n①海浪 ②在金色沙灘上 ③輕輕地 ④拍打著", options: ["①③④②", "②①③④", "③④①②", "①②④③"], answer: 0, explanation: "主語「海浪(①)」+ 狀語「輕輕地(③)」+ 謂語「拍打著(④)」+ 地點「在金色沙灘上(②)」。" },
-        { id: 9, category: "詞性認識", question: "在「小鳥在枝頭快樂地歌唱」一句中，「快樂地」是什麼詞性？", options: ["動詞", "名詞", "形容詞", "副詞（修飾動詞）"], answer: 3, explanation: "帶有「地」並修飾動詞「歌唱」，屬副詞用法。" },
-        { id: 10, category: "反義詞搭配", question: "「勤奮」的反義詞是甚麼？", options: ["怠惰", "聰穎", "勇敢", "溫和"], answer: 0, explanation: "勤奮的反義詞為怠惰（偷懶不做事）。" },
-        { id: 11, category: "成語寓意", question: "「亡羊補牢」這個成語啟發我們甚麼道理？", options: ["羊跑掉了就不用再建羊圈", "犯錯後及時補救，還不算太晚", "只要羊圈建得好就不會犯錯", "做事不必著急，順其自然"], answer: 1, explanation: "「亡羊補牢」比喻在受到損失後及時補救，免得以後再受損失。" },
-        { id: 12, category: "字音辨析", question: "下列哪一組詞語中「長」字的讀音與其他三者不同？", options: ["長度", "長遠", "長江", "長大"], answer: 3, explanation: "前三者讀音為 cháng（長度），「長大」讀音為 zhǎng（成長）。" },
-        { id: 13, category: "修辭辨析：擬人", question: "下列哪一句運用了「擬人」手法？", options: ["向日葵迎著朝陽昂首微笑。", "他的聲音比打雷還要響亮。", "紅紅的蘋果掛在枝頭像小燈籠。", "他一口氣喝完了整杯果汁。"], answer: 0, explanation: "將向日葵賦予人類「昂首微笑」的神態動作，是擬人修辭。" },
-        { id: 14, category: "關聯詞辨析", question: "「妹妹________年紀小，________懂得知書達禮。」橫線應填：", options: ["雖然……但是……", "因為……所以……", "只要……就……", "即使……也……"], answer: 0, explanation: "前後情況對比，存在轉折關係，使用「雖然……但是……」。" },
-        { id: 15, category: "詞語感情色彩", question: "下列哪一個詞語屬於「褒義詞」（正面表揚）？", options: ["自私自利", "捨己為人", "狐假虎威", "偷工減料"], answer: 1, explanation: "「捨己為人」稱讚人為了他人利益放棄自己，屬褒義詞。" },
-        { id: 16, category: "動詞搭配", question: "選出最適當的動詞：「校長在週會上向獲獎同學________獎狀。」", options: ["頒發", "發布", "派發", "贈送"], answer: 0, explanation: "頒給榮譽獎項或證書，莊重的搭配用「頒發」。" },
-        { id: 17, category: "量詞運用", question: "「池塘裡游過一________天鵝，美麗極了。」橫線上最恰當的量詞是：", options: ["隻", "對", "群", "個"], answer: 2, explanation: "形容聚集在一起的多隻天鵝，使用「一群」。" },
-        { id: 18, category: "書面語轉換", question: "粵語口語「琴日我同媽咪去買餸」轉換為規範書面語應為：", options: ["昨日我和媽媽去買菜", "琴天我跟媽媽去買餸", "昨日我與媽咪去購物", "昨天我同媽媽去買菜"], answer: 0, explanation: "「昨日/昨天」、「和/與」、「媽媽」、「買菜」均為規範書面語。" },
-        { id: 19, category: "成語辨錯", question: "下列哪一個成語有錯別字？", options: ["全神貫注", "水落石出", "五顏六色", "守株待兔"], answer: 0, explanation: "注意「全神貫注」的「貫」不可誤寫為習慣的「慣」。" },
-        { id: 20, category: "句子成分", question: "「勤勞的蜜蜂在花叢中採集香甜的花蜜。」這句話的「主語」（動作主角）是：", options: ["蜜蜂", "花叢", "花蜜", "香甜"], answer: 0, explanation: "句子核心主角是名詞「蜜蜂」。" }
-      ],
-      Humanities: [
-        { id: 1, category: "香港社區與地理", question: "香港由哪三個主要區域及多個離島組成？", options: ["香港島、九龍、新界", "九龍、沙田、大嶼山", "香港島、旺角、屯門", "新界、港島、大埔"], answer: 0, explanation: "香港地理劃分為香港島、九龍半島以及新界（含離島）。" },
-        { id: 2, category: "傳統節日與文化", question: "農曆八月十五日是中國傳統的中秋節，人們通常會吃甚麼應節食品？", options: ["粽子", "月餅", "年糕", "湯圓"], answer: 1, explanation: "中秋節象徵團圓，傳統應節食品是月餅。" },
-        { id: 3, category: "公共設施與公德心", question: "乘搭港鐵時，如果看到身邊有孕婦或長者，我們應該怎樣做？", options: ["假裝看不見繼續看手機", "主動讓座", "高聲談話引起注意", "立即走去另一節車廂"], answer: 1, explanation: "禮讓關愛座給老弱婦孺是具備公德心與同理心的良好公民表現。" },
-        { id: 4, category: "香港歷史古蹟", question: "位於大嶼山昂坪、世界上著名的露天青銅坐佛是甚麼？", options: ["天壇大佛", "黃大仙祠", "車公廟", "文武廟"], answer: 0, explanation: "天壇大佛位於大嶼山昂坪寶蓮寺旁，是香港著名地標。" },
-        { id: 5, category: "急救與求助熱線", question: "在香港遇到火警、嚴重罪案或需要緊急救護車時，應撥打甚麼緊急電話號碼？", options: ["999", "112", "1823", "1083"], answer: 0, explanation: "香港的緊急求助熱線電話是 999。" },
-        { id: 6, category: "家庭與長幼有序", question: "面對父母或長輩的叮嚀，我們應該抱持甚麼態度？", options: ["虛心聆聽並表達尊重", "隨意發脾氣頂撞", "完全不理睬", "敷衍答應後立刻忘記"], answer: 0, explanation: "孝順長輩、虛心受教是中華傳統美德及良好家庭關係的基石。" },
-        { id: 7, category: "香港公共交通", question: "行走於香港島北岸、俗稱「叮叮」而且歷史悠久的雙層交通工具是：", options: ["山頂纜車", "香港電車", "天星小輪", "輕鐵"], answer: 1, explanation: "香港電車自 1904 年起在港島行駛，因發出「叮叮」聲響而聞名。" },
-        { id: 8, category: "中華文化傳統美德", question: "「一諾千金」這個成語代表個人要具備甚麼品格？", options: ["守信用、重承諾", "懂得賺錢", "為人吝嗇", "脾氣急躁"], answer: 0, explanation: "「一諾千金」比喻說話非常算數，信守承諾。" },
-        { id: 9, category: "環境保護與回收", question: "在香港社區推行的「綠在區區」或三色回收桶中，啡色回收桶是用來收集甚麼廢物的？", options: ["廢紙", "塑膠", "金屬", "玻璃樽"], answer: 1, explanation: "三色回收口訣：藍廢紙、黃鋁罐（金屬）、啡膠樽（塑膠）。" },
-        { id: 10, category: "香港法定古蹟", question: "位於尖沙咀海旁、前九廣鐵路總站唯一保留下來的歷史標誌性建築物是：", options: ["鐘樓", "太空館", "大會堂", "雷生春"], answer: 0, explanation: "前九廣鐵路鐘樓於 1915 年落成，現為香港法定古蹟。" },
-        { id: 11, category: "世界地理與首都", question: "中國的首都以及國家行政中心是哪一個城市？", options: ["上海", "北京", "廣州", "深圳"], answer: 1, explanation: "中華人民共和國的首都是北京市。" },
-        { id: 12, category: "網絡禮儀與安全", question: "在互聯網上瀏覽或使用社交平台時，下列哪項做法是正確的？", options: ["隨意將自己的住址和電話告訴陌生網友", "遵守網絡禮儀，不發表侮辱性言論", "轉發未經證實的謠言", "下載來源不明的奇怪檔案"], answer: 1, explanation: "文明上網、保護個人隱私並遵守網絡禮儀是數位公民素養。" },
-        { id: 13, category: "香港多元文化", question: "香港是一個中西文化交融的國際大都會，下列哪項屬於西方引入的節日？", options: ["端午節", "清明節", "聖誕節", "重陽節"], answer: 2, explanation: "聖誕節源自西方基督教文化，在香港為法定公眾假期。" },
-        { id: 14, category: "消費與理財", question: "當我們拿到零用錢或壓歲錢時，下列哪種理財態度最健康？", options: ["一次過買光所有零食和玩具", "訂立儲蓄計劃，量入為出", "借錢給陌生人", "隨便亂放遺失"], answer: 1, explanation: "從小養成儲蓄、分清「想要」與「需要」是健康的理財概念。" },
-        { id: 15, category: "香港政府架構", question: "香港特別行政區政府的首長是甚麼職位？", options: ["行政長官", "政務司司長", "立法會主席", "終審法院首席法官"], answer: 0, explanation: "行政長官是香港特別行政區的首長，代表香港特區政府。" },
-        { id: 16, category: "非物質文化遺產", question: "每年農曆四月在長洲舉行、有搶包山比賽的著名傳統活動是：", options: ["大澳端午龍舟遊涌", "長洲太平清醮", "大坑舞火龍", "中秋綵燈會"], answer: 1, explanation: "長洲太平清醮有飄色巡遊和搶包山活動，是國家級非物質文化遺產。" },
-        { id: 17, category: "公民責任", question: "在郊野公園遠足時，看到地上有空水樽，我們應該：", options: ["踢到草叢裡面藏起來", "把垃圾帶走並投入分類垃圾桶", "留在原地留給清潔工人清理", "點火將塑膠燒毀"], answer: 1, explanation: "「自己垃圾自己帶走」是愛護郊野公園的基本原則。" },
-        { id: 18, category: "歷史人物認識", question: "發明活字印刷術、為人類文化傳播作出重大貢獻的中國古代人物是：", options: ["蔡倫", "畢昇", "張衡", "祖沖之"], answer: 1, explanation: "北宋發明家畢昇發明了膠泥活字印刷術；蔡倫是改進造紙術。" },
-        { id: 19, category: "香港的供水來源", question: "目前香港日常飲用水的主要來源是甚麼？", options: ["海水化淡", "東江水", "地下井水", "全部依賴本地水塘雨水"], answer: 1, explanation: "香港約七至八成食水來自廣東省輸入的東江水。" },
-        { id: 20, category: "社區互助", question: "當發現鄰居門外有異常煙霧或燒焦氣味時，應該第一時間：", options: ["留在房間睡覺", "通知家長並迅速按動火警鐘、報警求助", "自己拿水槍去救火", "立刻拍照上載社交網絡"], answer: 1, explanation: "發現火警徵兆應先保障安全、通知成人、敲響警鐘並報警求助。" }
-      ],
-      Science: [
-        { id: 1, category: "Structure of the Earth", question: "Which layer is the outermost and thinnest rocky surface layer of the Earth?", options: ["The Crust", "The Mantle", "The Outer Core", "The Inner Core"], answer: 0, explanation: "The crust is the thinnest outer layer where life exists, ranging from about 5 km under oceans to 70 km under continents." },
-        { id: 2, category: "Structure of the Earth", question: "Which layer of the Earth lies directly beneath the crust and contains semi-molten magma?", options: ["The Atmosphere", "The Mantle", "The Oceanic Trench", "The Inner Core"], answer: 1, explanation: "The mantle is the thickest layer located between the crust and outer core, composed of hot semi-solid rock and magma." },
-        { id: 3, category: "Structure of the Earth", question: "The inner core of the Earth remains solid despite extremely high temperatures mainly because of:", options: ["The presence of liquid water", "Immense gravitational pressure", "Lack of heavy metals", "Cold ocean currents"], answer: 1, explanation: "Enormous pressure at the center of the Earth prevents the iron and nickel in the inner core from melting into liquid." },
-        { id: 4, category: "Structure of the Earth", question: "Which layer of the Earth is composed of liquid iron and nickel, generating Earth's magnetic field?", options: ["The Continental Crust", "The Lithosphere", "The Outer Core", "The Upper Mantle"], answer: 2, explanation: "The liquid outer core's convective movement of molten iron and nickel creates the Earth's geomagnetic field." },
-        { id: 5, category: "Earth's Rotation & Revolution", question: "How long does it take for the Earth to complete one full rotation on its own tilted axis?", options: ["12 hours", "24 hours (1 day)", "30 days", "365 days (1 year)"], answer: 1, explanation: "Earth takes approximately 24 hours to rotate once on its axis, causing the cycle of day and night." },
-        { id: 6, category: "Earth's Rotation & Revolution", question: "The cycle of day and night on Earth is primarily caused by:", options: ["The revolution of the Earth around the Sun", "The rotation of the Earth on its axis", "The orbit of the Moon around the Earth", "The changing distance between Earth and Sun"], answer: 1, explanation: "As the Earth rotates from west to east, the side facing the Sun experiences daylight while the opposite side experiences darkness." },
-        { id: 7, category: "Earth's Rotation & Revolution", question: "How long does it take for the Earth to complete one full revolution around the Sun?", options: ["24 hours", "28 days", "About 365.25 days (1 year)", "100 days"], answer: 2, explanation: "It takes Earth roughly 365 and 1/4 days (one solar year) to orbit the Sun completely." },
-        { id: 8, category: "Earth's Rotation & Revolution", question: "The four distinct seasons on Earth are primarily caused by the revolution of the Earth together with:", options: ["The tilted axis of the Earth (about 23.5 degrees)", "The varying brightness of the Sun", "The gravitational pull of Mars", "The circular shape of the Earth"], answer: 0, explanation: "The tilt of Earth's rotational axis relative to its orbital plane causes different hemispheres to receive varying amounts of direct sunlight throughout the year." },
-        { id: 9, category: "Earth's Rotation & Revolution", question: "When the Northern Hemisphere (e.g., Hong Kong) is tilted toward the Sun and experiences summer, the Southern Hemisphere experiences:", options: ["Summer", "Winter", "Spring", "Autumn"], answer: 1, explanation: "When the Northern Hemisphere tilts towards the Sun, the Southern Hemisphere tilts away, thus experiencing winter." },
-        { id: 10, category: "Types of Rocks", question: "Which type of rock is formed when molten magma or lava cools down and solidifies?", options: ["Igneous rock", "Sedimentary rock", "Metamorphic rock", "Fossil rock"], answer: 0, explanation: "Igneous rocks (such as granite and basalt) form directly from the cooling and crystallization of magma or lava." },
-        { id: 11, category: "Types of Rocks", question: "Granite (花崗岩), which is commonly found in the hills of Hong Kong, is an example of:", options: ["An igneous rock", "A sedimentary rock", "A metamorphic rock", "A volcanic ash rock"], answer: 0, explanation: "Granite is an intrusive igneous rock formed when magma cools slowly beneath the Earth's surface." },
-        { id: 12, category: "Types of Rocks", question: "Which type of rock is formed through the accumulation, compaction, and cementation of mineral particles over long periods?", options: ["Sedimentary rock", "Igneous rock", "Volcanic glass", "Magma rock"], answer: 0, explanation: "Sedimentary rocks (like sandstone, shale, and limestone) are formed from compressed layers of sediments deposited in water or land." },
-        { id: 13, category: "Types of Rocks", question: "In which type of rock are ancient animal and plant fossils most commonly preserved?", options: ["Igneous rock", "Sedimentary rock", "Molten lava", "Deep metamorphic rock"], answer: 1, explanation: "Fossils are almost exclusively preserved in sedimentary rocks because the extreme heat of igneous and metamorphic processes destroys organic remains." },
-        { id: 14, category: "Types of Rocks", question: "Which type of rock is formed when existing rocks undergo transformation due to intense heat and high pressure deep underground?", options: ["Metamorphic rock", "Igneous rock", "Sedimentary rock", "Sandy rock"], answer: 0, explanation: "Metamorphic rocks (like marble and slate) form when heat and pressure alter existing igneous or sedimentary rocks without fully melting them." },
-        { id: 15, category: "Types of Rocks", question: "Marble (大理石), widely used in building sculptures and tiles, is a metamorphic rock formed from:", options: ["Limestone (石灰岩)", "Granite (花崗岩)", "Sandstone (砂岩)", "Basalt (玄武岩)"], answer: 0, explanation: "Marble is formed when limestone is exposed to high temperatures and pressures deep within the Earth." },
-        { id: 16, category: "Weathering & Erosion", question: "The natural process by which rocks are gradually broken down into smaller fragments by wind, rain, and temperature changes is called:", options: ["Weathering", "Eruption", "Evaporation", "Condensation"], answer: 0, explanation: "Weathering is the breaking down or dissolving of rocks and minerals on Earth's surface by physical, chemical, or biological agents." },
-        { id: 17, category: "Weathering & Erosion", question: "The transportation of weathered rock fragments and soil from one place to another by water or wind is called:", options: ["Erosion", "Metamorphism", "Sedimentation", "Melting"], answer: 0, explanation: "Erosion involves the movement of weathered rock materials by natural forces such as running water, waves, or wind." },
-        { id: 18, category: "Rock Cycle", question: "According to the rock cycle, if an igneous or sedimentary rock melts completely, it becomes:", options: ["Magma (or lava)", "Soil", "Fossil fuels", "Sediment"], answer: 0, explanation: "When rock is heated beyond its melting point deep inside the Earth, it returns to molten liquid rock called magma." },
-        { id: 19, category: "Earth & Moon", question: "Why does the Sun appear to rise in the east and set in the west every day?", options: ["Because the Earth rotates from west to east", "Because the Sun moves across the sky", "Because the Earth orbits the Moon", "Because the Earth's axis does not tilt"], answer: 0, explanation: "Earth's counter-clockwise rotation (from west to east) makes celestial bodies, including the Sun, appear to move across the sky from east to west." },
-        { id: 20, category: "Minerals & Rocks", question: "What is the relationship between minerals and rocks?", options: ["Rocks are made up of one or more minerals", "Minerals are made of melted rocks", "All rocks are pure chemical elements", "Rocks and minerals are unrelated"], answer: 0, explanation: "Rocks are solid natural aggregates composed of one or more minerals (for example, granite is made of quartz, feldspar, and mica)." }
-      ]
-    };
-
-    let curSubject = 'English';
-    let curIndex = 0;
-    let userAnswers = { English: new Array(20).fill(null), Maths: new Array(20).fill(null), Chinese: new Array(20).fill(null), Humanities: new Array(20).fill(null), Science: new Array(20).fill(null) };
-    let userFlags = { English: new Array(20).fill(false), Maths: new Array(20).fill(false), Chinese: new Array(20).fill(false), Humanities: new Array(20).fill(false), Science: new Array(20).fill(false) };
-    let timers = { English: 1200, Maths: 1200, Chinese: 1200, Humanities: 1200, Science: 1200 };
-    let timeSpent = { English: 0, Maths: 0, Chinese: 0, Humanities: 0, Science: 0 };
-    let timerId = null;
-    let isPaused = false;
-
-    function switchSubject(sub) {
-      curSubject = sub;
-      curIndex = 0;
-
-      ['English', 'Maths', 'Chinese', 'Humanities', 'Science'].forEach(s => {
-        const tab = document.getElementById(`tab-${s}`);
-        if (s === sub) {
-          tab.className = "py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-blue-600 text-white shadow-md";
-        } else {
-          tab.className = "py-2 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white";
-        }
-      });
-
-      const titles = {
-        English: '小四英文科模擬卷 (20題)',
-        Maths: '小四數學科模擬卷 (HCF & LCM 強化版)',
-        Chinese: '小四中文科模擬卷 (20題)',
-        Humanities: '小四人文科模擬卷 (20題)',
-        Science: 'Primary 4 Science (English Medium - 20 Questions)'
-      };
-      document.getElementById('subject-title').textContent = titles[sub];
-
-      renderPalette();
-      loadQuestion(0);
-      renderTimer();
-    }
-
-    function renderPalette() {
-      const grid = document.getElementById('palette-grid');
-      grid.innerHTML = '';
-      for (let i = 0; i < 20; i++) {
-        const btn = document.createElement('button');
-        btn.id = `pal-${i}`;
-        btn.textContent = i + 1;
-        btn.className = getPaletteClass(i);
-        btn.onclick = () => { if (!isPaused) loadQuestion(i); };
-        grid.appendChild(btn);
-      }
-      updateAnsweredCount();
-    }
-
-    function getPaletteClass(i) {
-      const isCur = i === curIndex;
-      const isAns = userAnswers[curSubject][i] !== null;
-      const isFlg = userFlags[curSubject][i];
-      let base = "h-9 w-full rounded-xl text-xs font-bold transition flex items-center justify-center ";
-
-      if (isCur) return base + "bg-[#1d2535] text-blue-400 border-2 border-blue-500 shadow-md";
-      if (isFlg) return base + "bg-[#25221b] text-amber-300 border border-amber-500/80";
-      if (isAns) return base + "bg-blue-600/25 text-blue-300 border border-blue-500/60";
-      return base + "bg-[#181c24] text-slate-400 border border-[#272e3d] hover:bg-[#202632]";
-    }
-
-    function updateAnsweredCount() {
-      const count = userAnswers[curSubject].filter(a => a !== null).length;
-      document.getElementById('palette-count').textContent = `${count}/20 answered`;
-    }
-
-    function loadQuestion(idx) {
-      curIndex = idx;
-      const q = p4Database[curSubject][idx];
-
-      document.getElementById('current-item-label').textContent = `Item ${idx + 1} of 20`;
-      document.getElementById('topic-tag').textContent = `${q.category} • P4 Curriculum`;
-      document.getElementById('question-text').textContent = q.question;
-
-      updateFlagButtonUI();
-
-      const container = document.getElementById('options-list');
-      container.innerHTML = '';
-      const letters = ['A', 'B', 'C', 'D'];
-
-      q.options.forEach((opt, optIdx) => {
-        const isChosen = userAnswers[curSubject][curIndex] === optIdx;
-        const btn = document.createElement('button');
-        btn.className = `w-full text-left p-3.5 sm:p-4 rounded-2xl border transition flex items-center justify-between group ${
-          isChosen
-            ? 'bg-[#1b253b] border-blue-500 text-white shadow-lg ring-1 ring-blue-500/50'
-            : 'bg-[#171a21] border-[#252b37] hover:border-[#353d4e] hover:bg-[#1c202a] text-slate-300'
-        }`;
-
-        btn.onclick = () => {
-          if (!isPaused) {
-            userAnswers[curSubject][curIndex] = optIdx;
-            loadQuestion(curIndex);
-          }
-        };
-
-        btn.innerHTML = `
-          <div class="flex items-center gap-3.5">
-            <span class="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold transition ${
-              isChosen ? 'bg-blue-600 text-white shadow-md' : 'bg-[#222733] text-slate-400 group-hover:text-slate-200 border border-[#2d3444]'
-            }">${letters[optIdx]}</span>
-            <span class="text-sm sm:text-base ${isChosen ? 'text-white font-medium' : ''}">${opt}</span>
-          </div>
-          ${isChosen ? '<i class="fa-solid fa-circle-check text-blue-400 text-base"></i>' : ''}
-        `;
-        container.appendChild(btn);
-      });
-
-      document.getElementById('prev-btn').disabled = idx === 0;
-      document.getElementById('next-btn').disabled = idx === 19;
-
-      for (let i = 0; i < 20; i++) {
-        const b = document.getElementById(`pal-${i}`);
-        if (b) b.className = getPaletteClass(i);
-      }
-      updateAnsweredCount();
-    }
-
-    function navigate(delta) {
-      const next = curIndex + delta;
-      if (next >= 0 && next < 20) loadQuestion(next);
-    }
-
-    function toggleFlag() {
-      userFlags[curSubject][curIndex] = !userFlags[curSubject][curIndex];
-      updateFlagButtonUI();
-      const b = document.getElementById(`pal-${curIndex}`);
-      if (b) b.className = getPaletteClass(curIndex);
-    }
-
-    function updateFlagButtonUI() {
-      const isFlg = userFlags[curSubject][curIndex];
-      const flagBtn = document.getElementById('flag-btn');
-      const flagText = document.getElementById('flag-text');
-      if (isFlg) {
-        flagBtn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/60 transition";
-        flagText.textContent = "Flagged";
-        flagBtn.querySelector('i').className = "fa-solid fa-flag text-xs text-amber-400";
-      } else {
-        flagBtn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#1a1e26] hover:bg-[#232936] text-slate-300 border border-[#2b3342] transition";
-        flagText.textContent = "Flag for Review";
-        flagBtn.querySelector('i').className = "fa-regular fa-flag text-xs";
-      }
-    }
-
-    function startTimer() {
-      clearInterval(timerId);
-      timerId = setInterval(() => {
-        if (!isPaused) {
-          if (timers[curSubject] > 0) {
-            timers[curSubject]--;
-            timeSpent[curSubject]++;
-            renderTimer();
-          } else {
-            clearInterval(timerId);
-            finishExam();
-          }
-        }
-      }, 1000);
-    }
-
-    function renderTimer() {
-      const m = Math.floor(timers[curSubject] / 60);
-      const s = timers[curSubject] % 60;
-      document.getElementById('timer-text').textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-    }
-
-    function togglePause() {
-      isPaused = !isPaused;
-      const overlay = document.getElementById('pause-overlay');
-      const txt = document.getElementById('pause-text');
-      if (isPaused) {
-        txt.textContent = "Resume";
-        overlay.classList.remove('hidden');
-        overlay.classList.add('flex');
-      } else {
-        txt.textContent = "Pause";
-        overlay.classList.remove('flex');
-        overlay.classList.add('hidden');
-      }
-    }
-
-    function confirmSubmission() {
-      const unans = userAnswers[curSubject].filter(a => a === null).length;
-      let msg = "確定現在交卷嗎？";
-      if (unans > 0) msg = `你尚有 ${unans} 題未作答！確定現在交卷嗎？`;
-      if (window.confirm(msg)) finishExam();
-    }
-
-    function finishExam() {
-      document.getElementById('exam-card').classList.add('hidden');
-      document.getElementById('result-view').classList.remove('hidden');
-      document.getElementById('result-view').classList.add('flex');
-
-      let score = 0;
-      const qList = p4Database[curSubject];
-      qList.forEach((q, idx) => {
-        if (userAnswers[curSubject][idx] === q.answer) score++;
-      });
-
-      const accuracy = Math.round((score / 20) * 100);
-      const spent = timeSpent[curSubject];
-      const m = Math.floor(spent / 60);
-      const s = spent % 60;
-
-      document.getElementById('res-score').textContent = `${score} / 20`;
-      document.getElementById('res-accuracy').textContent = `${accuracy}%`;
-      document.getElementById('res-time').textContent = `${m}分 ${s}秒`;
-
-      let banding = '需要努力';
-      if (score >= 18) banding = '優異 (Band 1A 等級)';
-      else if (score >= 15) banding = '良好 (Band 1 等級)';
-      else if (score >= 12) banding = '尚可 (Band 2 等級)';
-      document.getElementById('res-band').textContent = banding;
-
-      const container = document.getElementById('review-cards');
-      container.innerHTML = '';
-      const letters = ['A', 'B', 'C', 'D'];
-
-      qList.forEach((q, i) => {
-        const userChoice = userAnswers[curSubject][i];
-        const isOk = userChoice === q.answer;
-        const card = document.createElement('div');
-        card.className = `p-4 sm:p-5 rounded-2xl border transition ${isOk ? 'bg-[#141d1a] border-emerald-500/30' : 'bg-[#201518] border-rose-500/30'}`;
-        card.innerHTML = `
-          <div class="flex items-start justify-between gap-2 mb-2 flex-wrap">
-            <span class="font-bold text-white text-sm sm:text-base">第 ${i + 1} 題：${q.question}</span>
-            <span class="px-2.5 py-0.5 rounded-md text-xs font-bold ${isOk ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-rose-500/20 text-rose-300 border border-rose-500/40'}">
-              ${isOk ? '答對 Correct' : '答錯 Incorrect'}
-            </span>
-          </div>
-          <div class="text-xs sm:text-sm text-slate-300 grid grid-cols-1 sm:grid-cols-2 gap-2 my-2.5">
-            <div class="bg-[#181a20] p-2.5 rounded-xl border border-[#252832]">
-              你的答案：<strong class="${isOk ? 'text-emerald-400' : 'text-rose-400'}">${userChoice !== null ? letters[userChoice] + '. ' + q.options[userChoice] : '未作答'}</strong>
-            </div>
-            <div class="bg-[#181a20] p-2.5 rounded-xl border border-[#252832]">
-              正確答案：<strong class="text-emerald-400">${letters[q.answer]}. ${q.options[q.answer]}</strong>
-            </div>
-          </div>
-          <div class="mt-3 text-xs sm:text-sm bg-[#161921] p-3.5 rounded-xl border border-[#262c3a] text-slate-300 leading-relaxed">
-            <strong class="text-blue-400 font-semibold block mb-1">詳細思路與解題分析：</strong>
-            ${q.explanation}
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function retakeSubject() {
-      userAnswers[curSubject].fill(null);
-      userFlags[curSubject].fill(false);
-      timers[curSubject] = 1200;
-      timeSpent[curSubject] = 0;
-      isPaused = false;
-
-      document.getElementById('result-view').classList.remove('flex');
-      document.getElementById('result-view').classList.add('hidden');
-      document.getElementById('exam-card').classList.remove('hidden');
-
-      loadQuestion(0);
-      renderPalette();
-    }
-
-    window.onload = () => {
-      switchSubject('English');
-      startTimer();
-    };
-  </script>
 </body>
 </html>

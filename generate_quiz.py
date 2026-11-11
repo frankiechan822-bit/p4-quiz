@@ -9,8 +9,8 @@ if not API_KEY:
     print("ERROR: GEMINI_API_KEY is missing in GitHub Secrets!")
     exit(1)
 
-# 使用最新穩定版 gemini-1.5-flash 端點
-API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={API_KEY}"
+# 依序嘗試 Google 目前支援的標準端點名稱
+MODELS = ["gemini-1.5-flash-latest", "gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"]
 
 PROMPT = """
 You are an expert examination setter for Hong Kong Primary 4 (小四).
@@ -41,30 +41,37 @@ payload = {
     }
 }
 
-req = urllib.request.Request(
-    API_URL,
-    data=json.dumps(payload).encode("utf-8"),
-    headers={"Content-Type": "application/json"}
-)
+data_bytes = json.dumps(payload).encode("utf-8")
+result = None
 
-print("Connecting to Gemini API...")
-try:
-    with urllib.request.urlopen(req, timeout=120) as response:
-        result = json.loads(response.read().decode("utf-8"))
-except urllib.error.HTTPError as e:
-    error_body = e.read().decode("utf-8")
-    print(f"HTTPError {e.code}: {e.reason}")
-    print(f"Server response: {error_body}")
-    exit(1)
-except Exception as e:
-    print(f"Request failed: {e}")
+for model in MODELS:
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={API_KEY}"
+    print(f"Connecting to Gemini API using model: {model}...")
+    req = urllib.request.Request(
+        url,
+        data=data_bytes,
+        headers={"Content-Type": "application/json"}
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=120) as response:
+            result = json.loads(response.read().decode("utf-8"))
+            print(f"Success with model: {model}!")
+            break
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode("utf-8")
+        print(f"Failed with {model} (HTTP {e.code}): {error_body}")
+    except Exception as e:
+        print(f"Failed with {model}: {e}")
+
+if not result:
+    print("All candidate models failed. Exiting.")
     exit(1)
 
 try:
     generated_text = result["candidates"][0]["content"]["parts"][0]["text"].strip()
     quiz_data = json.loads(generated_text)
 except Exception as e:
-    print("JSON Parse Error. Raw response was:")
+    print("JSON Parse Error. Raw response:")
     print(result)
     exit(1)
 
